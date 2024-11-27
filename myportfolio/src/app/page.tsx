@@ -37,10 +37,10 @@ export default function Home() {
                 <a href="/contact" className="text-base-mobile sm:text-base-desktop">contact</a>
             </li>
             <li className="flex flex-col items-center">
-                <Link href="">
+                <Link href="https://drive.google.com/file/d/1ZlXPqvFE0gs2E72TYkKF0d6iQtd9Fpte/view?usp=sharing">
                     <Image src="/cutout/scarf.png" alt="résumé" width={70} height={70} />
                 </Link>
-                <a href="" className="text-base-mobile sm:text-base-desktop">résumé</a>
+                <a href="https://drive.google.com/file/d/1ZlXPqvFE0gs2E72TYkKF0d6iQtd9Fpte/view?usp=sharing" target="_blank" className="text-base-mobile sm:text-base-desktop">résumé</a>
             </li>
         </ul>
     </div>

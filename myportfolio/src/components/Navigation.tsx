@@ -16,16 +16,16 @@ export default function Nav() {
             </div>
             <ul className="flex justify-center space-x-12">
                 <li>
-                    <a href="#about" className="text-base-mobile sm:text-base-desktop">about</a>
+                    <a href="/about" className="text-base-mobile sm:text-base-desktop">about</a>
                 </li>
                 <li>
-                    <a href="#projects" className="text-base-mobile sm:text-base-desktop">projects</a>
+                    <a href="/projects" className="text-base-mobile sm:text-base-desktop">projects</a>
                 </li>
                 <li>
-                    <a href="#contact" className="text-base-mobile sm:text-base-desktop">contact</a>
+                    <a href="/contact" className="text-base-mobile sm:text-base-desktop">contact</a>
                 </li>
                 <li>
-                    <a href="#resume" className="text-base-mobile sm:text-base-desktop">résumé</a>
+                    <a href="https://drive.google.com/file/d/1ZlXPqvFE0gs2E72TYkKF0d6iQtd9Fpte/view?usp=sharing" target="_blank" className="text-base-mobile sm:text-base-desktop">résumé</a>
                 </li>
             </ul>
         </nav>
