@@ -1,12 +1,16 @@
-// src/app/contact/page.tsx
+import Nav from '../components/Navigation';
 
-import React from "react";
-
-export default function ContactPage() {
+export default function Home() {
   return (
     <div>
-      <h1>About Page</h1>
-      <p>Welcome to the about page!</p>
+      <Nav />
+
+      <main className="p-4">
+        <h1 className="text-h1-mobile sm:text-h1-desktop">Welcome to My Portfolio</h1>
+        <p className="text-base-mobile sm:text-base-desktop">
+          This is the main content of the page.
+        </p>
+      </main>
     </div>
   );
 }
