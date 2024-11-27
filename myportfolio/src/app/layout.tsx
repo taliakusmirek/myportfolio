@@ -1,21 +1,19 @@
-import type { Metadata } from "next";
+// src/app/layout.tsx
+
+import React from "react";
 import "./globals.css";
 
-
-export const metadata: Metadata = {
-  title: "TaliaLabs",
-  description: "The official portfolio of Talia Kusmirek, including open-source tools made under the TaliaLabs brand.",
+export const metadata = {
+  title: "talialabs",
+  description: "The portfolio of Talia Kusmirek and all open-source tools of the 'talialabs' brand.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        {children}
+        {/* Global elements like headers or navigation can go here */}
+        <main>{children}</main> {/* The page content will be rendered here */}
       </body>
     </html>
   );
