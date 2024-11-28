@@ -5,13 +5,36 @@ import { useState } from 'react';
       
 export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('')
+  const [message, setMessage] = useState('')
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault(); 
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
 
-    // Here, you would send the form data to your backend/email service
+    try {
+      const res = await fetch('pages/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, subject, message }),
+      });
 
-    setIsSubmitted(true);
+      const result = await res.json();
+
+      if (res.status === 200) {
+        setIsSubmitted(true); // Show thank you message
+        setEmail('');
+        setSubject('');
+        setMessage('');
+      } else {
+        alert(result.error || 'Something went wrong');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Failed to send email');
+    }
   };
 
   return (
@@ -41,6 +64,8 @@ export default function Contact() {
                 id="email"
                 name="email"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder=""
                 className="mt-1 block w-full p-3  border-brand-Bold-Red border-2 rounded-md "
               />
@@ -54,6 +79,8 @@ export default function Contact() {
                 id="subject"
                 name="subject"
                 required
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
                 placeholder=""
                 className="mt-1 block w-full p-3  border-brand-Bold-Red border-2 rounded-md"
               />
@@ -66,6 +93,8 @@ export default function Contact() {
                 id="message"
                 name="message"
                 required
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
                 placeholder=""
                 className="mt-1 block w-full p-3  border-brand-Bold-Red border-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
               ></textarea>
