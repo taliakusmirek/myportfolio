@@ -49,6 +49,10 @@ export default {
           fontWeight: '800' 
         }],
       },
+      fontFamily: {
+        Script: ['Script', 'sans-serif'],
+        Rubik: ['Rubik', 'Arial'],
+      },
     },
   },
   plugins: [],
