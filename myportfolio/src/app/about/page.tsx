@@ -1,11 +1,13 @@
 'use client'
 import Image from 'next/image';
 import Nav from '../../components/Navigation';
-import { useState } from 'react';
+import Footer from '../../components/Footer';
+import { useState, useEffect } from 'react';
 
 export default function About() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  
+  const [cardsVisible, setCardsVisible] = useState<boolean[]>([]);
+
   const content = [
     {
       title: "advocating AI ethics",
@@ -36,14 +38,30 @@ export default function About() {
     },
   ];
 
+  // Handle the fade-in for each card
+  useEffect(() => {
+    const timers = content.map((_, index) =>
+      setTimeout(() => {
+        setCardsVisible((prev) => [...prev, true]);
+      }, index * 300) // Adjust delay between card appearances
+    );
+
+    return () => timers.forEach((timer) => clearTimeout(timer));
+  }, []);
+
   return (
     <div>
       <Nav />
-      <main className="p-4 ">
-        <h1 className="text-h1-mobile md:text-h2-desktop mt-20 mb-16 text-brand-Bold-Red flex justify-center">
-          i've been pretty busy...
-        </h1>
-
+      <main className="p-4 mt-8">
+        {/* Title without typewriter effect */}
+        <div className="flex justify-center">
+          <h1
+            className="text-h1-mobile md:text-h2-desktop mt-20 mb-16 text-brand-Bold-Red flex justify-center"
+            style={{ whiteSpace: 'nowrap' }}
+          >
+            i've been pretty busy...
+          </h1>
+        </div>
         <div className="grid justify-items-center gap-8 px-4 sm:px-10 py-10 auto-rows-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-16 pb-16 sm:pb-24">
           {content.map((item, index) => (
             <div
@@ -54,6 +72,7 @@ export default function About() {
                 ${item.specialClass || ''} 
                 ${hoveredCard === index ? 'bg-brand-Bold-Red text-white' : ''}
                 w-full max-w-[360px] min-h-[200px] 
+                ${cardsVisible[index] ? 'fade-in' : 'opacity-0'}
               `}
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
@@ -68,7 +87,7 @@ export default function About() {
                       ? '-translate-y-16'
                     : item.specialClass === 'blackbag-card-adjust'
                       ? '-translate-y-16'
-                      : '-translate-y-16'
+                    : '-translate-y-16'
                   } 
                   px-2.5 flex items-center z-20 w-full
                 `}
@@ -94,7 +113,7 @@ export default function About() {
                       ? 'ml-8'
                     : item.specialClass === 'blackbag-card-adjust'
                       ? 'ml-6'
-                      : ''
+                    : ''
                   }`}
                 >
                   <Image
@@ -159,6 +178,7 @@ export default function About() {
           ))}
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

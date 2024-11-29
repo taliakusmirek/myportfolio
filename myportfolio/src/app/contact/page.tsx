@@ -1,5 +1,7 @@
 'use client'
 import Nav from '../../components/Navigation';
+import Footer from '../../components/Footer';
+
 import Image from 'next/image';
 import { useState } from 'react';
       
@@ -13,7 +15,7 @@ export default function Contact() {
     event.preventDefault();
 
     try {
-      const res = await fetch('pages/api/send-email', {
+      const res = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,6 +121,7 @@ export default function Contact() {
           </div>
         )}
       </main>
+      <Footer />
     </div>
   );
 }
