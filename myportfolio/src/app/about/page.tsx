@@ -8,6 +8,7 @@ export default function About() {
       title: "advocating AI ethics",
       image: { src: "/cutout/blackbag.png", width: 60, height: 100 },
       text: `As a Core Member of Innovate For Everyone and the first American scholar of the United Nations' 'AI For Good' Program, I dedicate time to promoting responsible AI practices...`,
+      specialClass: "blackbag-card-adjust"
     },
     {
       title: "building Ophelia",
@@ -18,54 +19,80 @@ export default function About() {
       title: "growing my brand",
       image: { src: "/cutout/scarf.png", width: 60, height: 70 },
       text: `Building a personal brand has been an exciting journey, blending creativity, technical skill, and entrepreneurial vision...`,
+      specialClass: "brand-card-adjust"
     },
     {
       title: "studying in Boston",
       image: { src: "/cutout/dior.png", width: 80, height: 100 },
       text: `Pursuing a dual concentration in Computer Science and Business Analytics at Boston College...`,
+      specialClass: "dior-card-adjust"
     },
   ];
 
   return (
     <div>
       <Nav />
-      <main className="p-4">
+      <main className="p-4 ">
         <h1 className="text-h1-mobile md:text-h2-desktop mt-20 mb-16 text-brand-Bold-Red flex justify-center">
           i've been pretty busy...
         </h1>
 
-        <div className="grid gap-8 p-10 auto-rows-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-16">
+        <div className="grid justify-items-center gap-8 px-4 sm:px-10 py-10 auto-rows-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-16 pb-16 sm:pb-24">
           {content.map((item, index) => (
             <div
               key={index}
-              className="relative border-2 border-brand-Bold-Red rounded-lg p-6"
-              style={{ maxWidth: `${item.image.width + 300}px` }} // Adjust dynamically
+              className={`relative border-2 border-brand-Bold-Red rounded-lg p-6 mb-14 ${item.specialClass || ''}`}
+              style={{ maxWidth: `${item.image.width + 300}px` }}
             >
               <div
-                className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-16 px-2.5 flex items-center z-20 w-full"
+                className={`absolute top-0 left-1/2 transform -translate-x-1/2 ${
+                  item.specialClass === 'brand-card-adjust' 
+                    ? '-translate-y-12' 
+                  : item.specialClass === 'dior-card-adjust'
+                    ? '-translate-y-16'
+                  : '-translate-y-16'
+                } px-2.5 flex items-center z-20 w-full`}
                 style={{ height: `${item.image.height}px` }}
               >
                 <h2
-                  className="text-xl font-Script text-brand-Bold-Red text-center"
+                  className="text-xl font-Script text-brand-Bold-Red text-center whitespace-nowrap"
                   style={{
                     maxWidth: `${item.image.width + 150}px`,
                   }}
                 >
                   {item.title}
                 </h2>
-                <Image
-                  src={item.image.src}
-                  alt={item.title}
-                  width={item.image.width}
-                  height={item.image.height}
-                  className="ml-2"
-                />
+                <div 
+                  className={`ml-2 flex ${
+                    item.specialClass === 'brand-card-adjust' 
+                      ? 'justify-end absolute right-2 top-1/2 -translate-y-1/2' 
+                    : item.specialClass === 'dior-card-adjust'
+                      ? 'ml-8'
+                    : ''
+                  }`}
+                >
+                  <Image
+                    src={item.image.src}
+                    alt={item.title}
+                    width={item.image.width}
+                    height={item.image.height}
+                    className={`${
+                      item.specialClass === 'brand-card-adjust' 
+                        ? 'mr-0 mt-20' 
+                      : item.specialClass === 'blackbag-card-adjust'
+                        ? '-mt-4 ml-2'
+                      : item.specialClass === 'dior-card-adjust'
+                        ? '-mt-10'
+                      : '-mt-6 ml-2'
+                    }`}
+                  />
+                </div>
               </div>
-              <p className="text-sm mt-10">{item.text}</p>
+              <p className="text-sm mt-10 ">{item.text}</p>
             </div>
           ))}
         </div>
       </main>
     </div>
   );
-}
+                  }
