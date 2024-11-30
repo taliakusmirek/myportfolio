@@ -1,6 +1,6 @@
 'use client'
-
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import Nav from '../../components/Navigation';
@@ -11,6 +11,8 @@ interface Project {
   title: string;
   imageSrc: string;
   description: string;
+  techStack: string;
+  dateRange: string;
 }
 
 interface Category {
@@ -26,35 +28,139 @@ export default function Home() {
   // Define categories with proper types
   const categories: Category[] = [
     {
-      name: "fashion",
-      imageSrc: "/cutout/miumiu.png",
+      name: 'fashion',
+      imageSrc: '/cutout/miumiu.png',
       projects: [
-        { title: "Project 1", imageSrc: "/cutout/fashion1.png", description: "This is a fashion project description." },
-        { title: "Project 2", imageSrc: "/cutout/fashion2.png", description: "This is another fashion project description." }
-      ]
+        { 
+          title: 'myCloset', 
+          imageSrc: '/cutout/fashion1.png', 
+          description: `A digital wardrobe management application designed to revolutionize 
+          personal fashion organization and styling.
+    
+          The app aims to provide users with an intuitive interface to catalog 
+          their clothing items, create outfit combinations, and track their 
+          wardrobe inventory.
+    
+          Features include item categorization, outfit planning, and style recommendations.`,
+          techStack: 'React Native, TypeScript, Firebase',
+          dateRange: 'Spring 2024'
+        },
+        { 
+          title: 'Focal', 
+          imageSrc: '/cutout/fashion2.png', 
+          description: `An innovative fashion recommendation platform that leverages 
+          machine learning to provide personalized style suggestions.
+    
+          The application analyzes user preferences, body type, and current 
+          fashion trends to curate unique outfit recommendations.
+    
+          Designed to help users discover new styles and build confidence 
+          in their fashion choices.`,
+          techStack: 'Python, Machine Learning, React',
+          dateRange: 'Summer 2024'
+        },
+        { 
+          title: 'W.F.B.', 
+          imageSrc: '/cutout/fashion3.png', 
+          description: `A sustainable fashion marketplace that connects conscious 
+          consumers with eco-friendly and ethical fashion brands.
+    
+          The platform focuses on promoting sustainable fashion choices, 
+          providing transparency about clothing production, and supporting 
+          environmentally responsible designers.
+    
+          Features include brand stories, sustainability ratings, and 
+          curated collections of ethical fashion.`,
+          techStack: 'Django, PostgreSQL, React',
+          dateRange: 'Fall 2024'
+        },
+        { 
+          title: 'Trends Tracker', 
+          imageSrc: '/cutout/fashion4.png', 
+          description: `A comprehensive fashion trend analysis and forecasting tool 
+          that aggregates data from social media, fashion weeks, and 
+          online shopping platforms.
+    
+          Utilizes advanced data analytics to predict upcoming fashion trends, 
+          providing insights for designers, retailers, and fashion enthusiasts.
+    
+          Offers real-time trend visualization and predictive trend mapping.`,
+          techStack: 'Data Science, React, Machine Learning',
+          dateRange: 'Winter 2024'
+        },
+      ],
     },
     {
-      name: "tech",
-      imageSrc: "/cutout/scarf.png",
+      name: 'tech',
+      imageSrc: '/cutout/scarf.png',
       projects: [
-        { title: "Tech Project 1", imageSrc: "/cutout/tech1.png", description: "This is a tech project description." },
-        { title: "Tech Project 2", imageSrc: "/cutout/tech2.png", description: "This is another tech project description." }
-      ]
+        { 
+          title: 'Rust Security Chatbot', 
+          imageSrc: '/cutout/tech1.png', 
+          description: `This project implements a chatbot interface that allows users to input Rust code snippets 
+          and receive security-related feedback. 
+    
+          The backend is built with Rust, utilizing an HTTP server and thread pool implementation. 
+          The front end is a simple HTML/JavaScript interface that communicates with the Rust backend.
+    
+          See the code <a href="https://github.com/taliakusmirek/Rust-Based-Chatbot-for-Security-Auditing">here</a>`,
+          techStack: 'Rust, HTML, JavaScript',
+          dateRange: 'Summer 2023'
+        },
+        { 
+          title: 'Nebula : Vector DB', 
+          imageSrc: '/cutout/tech2.png', 
+          description: 'Work in progress! Github link up soon.',
+          techStack: 'TBD',
+          dateRange: 'Ongoing'
+        },
+        { 
+          title: 'Advocato', 
+          imageSrc: '/cutout/tech3.png', 
+          description: `Advocato is an online platform designed to support the assessment and management 
+          of domestic violence cases in Spain. 
+    
+          Built with Django, this project aligns with the United Nations Sustainable Development Goals (SDG), 
+          particularly SDG 5: Gender Equality and SDG 16: Peace, Justice, and Strong Institutions. 
+    
+          Advocato aims to improve the accuracy and comprehensiveness of domestic violence risk assessments, 
+          starting with Spain and potentially expanding to other regions.
+    
+          See the code <a href="https://github.com/taliakusmirek/Advocato-SpainDomesticViolence-Chatbot">here</a>`,
+          techStack: 'Django, Python, Web Development',
+          dateRange: 'Fall 2023'
+        },
+        { 
+          title: 'Carbon Emissions Predictor', 
+          imageSrc: '/cutout/tech4.png', 
+          description: `This project aims to predict carbon emissions using a machine learning model. 
+    
+          I used historical data from the Carbon Majors Emissions dataset available on Kaggle. 
+    
+          The main goal was to create an accurate predictive model and evaluate its performance.
+    
+          See the code <a href="https://github.com/taliakusmirek/Carbon-Emissions-Predictor">here</a>`,
+          techStack: 'Machine Learning, Python, Data Science',
+          dateRange: 'Winter 2023'
+        },
+      ],
     }
   ];
 
   const handleCategoryClick = (category: string) => {
-    // Toggle category open/close
-    if (selectedCategory === category) {
-      setSelectedCategory(null); // Close the category if it's already open
-    } else {
-      setSelectedCategory(category); // Open the selected category
-    }
-    setSelectedProject(null);  // Reset project details when switching categories
+    // Toggle category selection
+    setSelectedCategory(prevCategory => 
+      prevCategory === category ? null : category
+    );
+    setSelectedProject(null);
   };
 
   const handleProjectClick = (project: Project) => {
     setSelectedProject(project);
+  };
+
+  const handleCloseProjectDetails = () => {
+    setSelectedProject(null);
   };
 
   return (
@@ -70,10 +176,8 @@ export default function Home() {
                   key={index}
                   className={`flex flex-col items-center cursor-pointer transition-all duration-500 ease-in-out ${
                     selectedCategory === category.name
-                      ? category.name === "tech"
-                        ? "translate-x-[100px] opacity-75"  // Move tech right with opacity change
-                        : "translate-x-[-100px] opacity-75"  // Move fashion left with opacity change
-                      : "opacity-100"
+                      ? 'opacity-75'
+                      : 'opacity-100'
                   }`}
                   onClick={() => handleCategoryClick(category.name)}
                 >
@@ -88,36 +192,56 @@ export default function Home() {
 
           {/* If a category is selected, show the projects */}
           {selectedCategory && (
-            <div className="mt-8 transition-all duration-500 ease-in-out">
-              <div className="flex justify-center space-x-10">
-                {categories.find(c => c.name === selectedCategory)?.projects.map((project, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col items-center cursor-pointer"
-                    onClick={() => handleProjectClick(project)}
-                  >
-                    <Image
-                      src={project.imageSrc}
-                      alt={project.title}
-                      width={100}
-                      height={100}
-                    />
-                    <span className="text-sm font-Script mt-2">{project.title}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Display the project details when a project is clicked */}
-              {selectedProject && (
-                <div className="mt-8 border-2 p-4 rounded-lg">
-                  <h2 className="text-lg font-bold">{selectedProject.title}</h2>
-                  <p>{selectedProject.description}</p>
-                </div>
-              )}
+            <div className="mt-16 flex justify-center space-x-10">
+              {categories.find((c) => c.name === selectedCategory)?.projects.map((project, index) => (
+                <motion.div
+                  key={index}
+                  className="flex flex-col items-center cursor-pointer"
+                  onClick={() => handleProjectClick(project)}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Image
+                    src={project.imageSrc}
+                    alt={project.title}
+                    width={100}
+                    height={100}
+                  />
+                  <span className="text-sm font-Script mt-2">{project.title}</span>
+                </motion.div>
+              ))}
             </div>
           )}
         </div>
       </main>
+
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
+              initial={{ scale: 0.5 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.5 }}
+            >
+              <h2 className="text-lg font-bold">{selectedProject.title}</h2>
+              <p>{selectedProject.description}</p>
+              <button
+                className="mt-4 bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded"
+                onClick={handleCloseProjectDetails}
+              >
+                Close
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </div>
