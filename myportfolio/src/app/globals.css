@@ -28,6 +28,7 @@ body {
 
 h1 {
   @apply font-Script;
+  font-weight: 0;
 }
 
 p {
