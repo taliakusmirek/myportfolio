@@ -56,7 +56,7 @@ export default function About() {
         {/* Title without typewriter effect */}
         <div className="flex justify-center">
           <h1
-            className="text-h1-mobile md:text-h2-desktop mt-20 mb-16 text-brand-Bold-Red flex justify-center"
+            className="text-h1-mobile md:text-h2-desktop mt-20 mb-20 text-brand-Bold-Red flex justify-center"
             style={{ whiteSpace: 'nowrap' }}
           >
             i've been pretty busy...

@@ -13,6 +13,9 @@ interface Project {
   description: string;
   techStack: string;
   dateRange: string;
+  githubLink?: string; // Optional GitHub link
+  imageWidth?: number;
+  imageHeight?: number;
 }
 
 interface Category {
@@ -33,7 +36,7 @@ export default function Home() {
       projects: [
         { 
           title: 'myCloset', 
-          imageSrc: '/cutout/fashion1.png', 
+          imageSrc: '/cutout/christian.png', 
           description: `A digital wardrobe management application designed to revolutionize 
           personal fashion organization and styling.
     
@@ -43,11 +46,14 @@ export default function Home() {
     
           Features include item categorization, outfit planning, and style recommendations.`,
           techStack: 'React Native, TypeScript, Firebase',
-          dateRange: 'Spring 2024'
+          dateRange: 'Winter 2024',
+          githubLink: undefined,
+          imageWidth: 150,
+          imageHeight: 150
         },
         { 
           title: 'Focal', 
-          imageSrc: '/cutout/fashion2.png', 
+          imageSrc: '/cutout/bucket.png', 
           description: `An innovative fashion recommendation platform that leverages 
           machine learning to provide personalized style suggestions.
     
@@ -57,11 +63,14 @@ export default function Home() {
           Designed to help users discover new styles and build confidence 
           in their fashion choices.`,
           techStack: 'Python, Machine Learning, React',
-          dateRange: 'Summer 2024'
+          dateRange: 'Winter 2025',
+          githubLink: undefined,
+          imageWidth: 150,
+          imageHeight: 150
         },
         { 
           title: 'W.F.B.', 
-          imageSrc: '/cutout/fashion3.png', 
+          imageSrc: '/cutout/jean.png', 
           description: `A sustainable fashion marketplace that connects conscious 
           consumers with eco-friendly and ethical fashion brands.
     
@@ -72,11 +81,14 @@ export default function Home() {
           Features include brand stories, sustainability ratings, and 
           curated collections of ethical fashion.`,
           techStack: 'Django, PostgreSQL, React',
-          dateRange: 'Fall 2024'
+          dateRange: 'Spring 2025',
+          githubLink: undefined,
+          imageWidth: 150,
+          imageHeight: 150
         },
         { 
           title: 'Trends Tracker', 
-          imageSrc: '/cutout/fashion4.png', 
+          imageSrc: '/cutout/bow.png', 
           description: `A comprehensive fashion trend analysis and forecasting tool 
           that aggregates data from social media, fashion weeks, and 
           online shopping platforms.
@@ -86,7 +98,10 @@ export default function Home() {
     
           Offers real-time trend visualization and predictive trend mapping.`,
           techStack: 'Data Science, React, Machine Learning',
-          dateRange: 'Winter 2024'
+          dateRange: 'Spring 2025',
+          githubLink: undefined,
+          imageWidth: 150,
+          imageHeight: 150
         },
       ],
     },
@@ -96,27 +111,31 @@ export default function Home() {
       projects: [
         { 
           title: 'Rust Security Chatbot', 
-          imageSrc: '/cutout/tech1.png', 
+          imageSrc: '/cutout/chloe.png', 
           description: `This project implements a chatbot interface that allows users to input Rust code snippets 
           and receive security-related feedback. 
     
           The backend is built with Rust, utilizing an HTTP server and thread pool implementation. 
-          The front end is a simple HTML/JavaScript interface that communicates with the Rust backend.
-    
-          See the code <a href="https://github.com/taliakusmirek/Rust-Based-Chatbot-for-Security-Auditing">here</a>`,
+          The front end is a simple HTML/JavaScript interface that communicates with the Rust backend.`,
           techStack: 'Rust, HTML, JavaScript',
-          dateRange: 'Summer 2023'
+          dateRange: 'Summer 2024',
+          githubLink: 'https://github.com/taliakusmirek/Rust-Based-Chatbot-for-Security-Auditing',
+          imageWidth: 150,
+          imageHeight: 150
         },
         { 
-          title: 'Nebula : Vector DB', 
-          imageSrc: '/cutout/tech2.png', 
+          title: 'Nebula: Vector DB', 
+          imageSrc: '/cutout/ysl.png', 
           description: 'Work in progress! Github link up soon.',
-          techStack: 'TBD',
-          dateRange: 'Ongoing'
+          techStack: 'Rust, C, RestAPI, Docker',
+          dateRange: 'Ongoing',
+          githubLink: undefined,
+          imageWidth: 150,
+          imageHeight: 150
         },
         { 
           title: 'Advocato', 
-          imageSrc: '/cutout/tech3.png', 
+          imageSrc: '/cutout/prada.png', 
           description: `Advocato is an online platform designed to support the assessment and management 
           of domestic violence cases in Spain. 
     
@@ -124,24 +143,26 @@ export default function Home() {
           particularly SDG 5: Gender Equality and SDG 16: Peace, Justice, and Strong Institutions. 
     
           Advocato aims to improve the accuracy and comprehensiveness of domestic violence risk assessments, 
-          starting with Spain and potentially expanding to other regions.
-    
-          See the code <a href="https://github.com/taliakusmirek/Advocato-SpainDomesticViolence-Chatbot">here</a>`,
-          techStack: 'Django, Python, Web Development',
-          dateRange: 'Fall 2023'
+          starting with Spain and potentially expanding to other regions.`,
+          techStack: 'Django, Python, Tensorflow',
+          dateRange: 'Fall 2023',
+          githubLink: 'https://github.com/taliakusmirek/Advocato-SpainDomesticViolence-Chatbot',
+          imageWidth: 150,
+          imageHeight: 150
         },
         { 
           title: 'Carbon Emissions Predictor', 
-          imageSrc: '/cutout/tech4.png', 
+          imageSrc: '/cutout/pradabag.png', 
           description: `This project aims to predict carbon emissions using a machine learning model. 
     
           I used historical data from the Carbon Majors Emissions dataset available on Kaggle. 
     
-          The main goal was to create an accurate predictive model and evaluate its performance.
-    
-          See the code <a href="https://github.com/taliakusmirek/Carbon-Emissions-Predictor">here</a>`,
-          techStack: 'Machine Learning, Python, Data Science',
-          dateRange: 'Winter 2023'
+          The main goal was to create an accurate predictive model and evaluate its performance.`,
+          techStack: 'Machine Learning, Python, Pandas, Tensorflow',
+          dateRange: 'Winter 2023',
+          githubLink: 'https://github.com/taliakusmirek/Carbon-Emissions-Predictor',
+          imageWidth: 150,
+          imageHeight: 150
         },
       ],
     }
@@ -169,7 +190,7 @@ export default function Home() {
 
       <main className="flex-grow flex items-center justify-center">
         <div className="text-center">
-          <div className="flex justify-center items-center mt-8">
+          <div className="flex justify-center items-center mt-16">
             <ul className="flex space-x-20">
               {categories.map((category, index) => (
                 <li
@@ -192,23 +213,26 @@ export default function Home() {
 
           {/* If a category is selected, show the projects */}
           {selectedCategory && (
-            <div className="mt-16 flex justify-center space-x-10">
+            <div className="mt-16 flex flex-col items-center space-y-6 sm:flex-row sm:space-y-0 sm:space-x-10">
               {categories.find((c) => c.name === selectedCategory)?.projects.map((project, index) => (
                 <motion.div
                   key={index}
-                  className="flex flex-col items-center cursor-pointer"
+                  className="flex flex-col items-center cursor-pointer border-2 border-brand-Bold-Red rounded-lg p-2 shadow-md w-48 h-auto"
                   onClick={() => handleProjectClick(project)}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Image
-                    src={project.imageSrc}
-                    alt={project.title}
-                    width={100}
-                    height={100}
-                  />
-                  <span className="text-sm font-Script mt-2">{project.title}</span>
+                  <div className="flex justify-center items-center h-32 w-full">
+                    <Image
+                      src={project.imageSrc}
+                      alt={project.title}
+                      width={project.imageWidth || 150}
+                      height={project.imageHeight || 150}
+                      className="object-contain max-h-full max-w-full"
+                    />
+                  </div>
+                  <span className="text-sm mt-2 text-brand-Bold-Red text-center">{project.title}</span>
                 </motion.div>
               ))}
             </div>
@@ -219,25 +243,42 @@ export default function Home() {
       <AnimatePresence>
         {selectedProject && (
           <motion.div
-            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
+              className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative"
               initial={{ scale: 0.5 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.5 }}
             >
-              <h2 className="text-lg font-bold">{selectedProject.title}</h2>
-              <p>{selectedProject.description}</p>
-              <button
-                className="mt-4 bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded"
-                onClick={handleCloseProjectDetails}
+              <h2 
+                className={`text-lg font-bold text-brand-Bold-Red font-Script ${
+                  selectedProject.githubLink 
+                    ? 'cursor-pointer hover:underline' 
+                    : ''
+                }`}
+                onClick={() => {
+                  if (selectedProject.githubLink) {
+                    window.open(selectedProject.githubLink, '_blank', 'noopener,noreferrer');
+                  }
+                }}
               >
-                Close
-              </button>
+                {selectedProject.title}
+              </h2>
+              <p className="text-xs-mobile text-xs-desktop pb-2">{selectedProject.dateRange}</p>
+              <p className="text-xs-mobile text-xs-desktop pb-6 text-brand-Bold-Red">{selectedProject.techStack}</p>
+              <p>{selectedProject.description}</p>
+              <div className="flex justify-end mt-8">
+                <button
+                  className="text-brand-Bold-Red hover:bg-gray-200 border-brand-Bold-Red border-2 px-4 py-2 rounded"
+                  onClick={handleCloseProjectDetails}
+                >
+                  close
+                </button>
+              </div>
             </motion.div>
           </motion.div>
         )}

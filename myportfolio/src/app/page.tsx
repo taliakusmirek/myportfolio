@@ -19,7 +19,7 @@ export default function Home() {
       <main className="flex-grow flex items-center justify-center">
         <div className="text-center">
           <div className="flex justify-center items-center mt-8"> {/* Adjust space between the logo and content */}
-            <ul className="flex justify-center space-x-20"> {/* Adjust space between items */}
+          <ul className="flex flex-col items-center space-y-10 sm:flex-row sm:space-y-16 sm:space-x-20"> {/* Responsive layout */}
               <li className="flex flex-col items-center">
                 <Link href="/about">
                   <Image src="/cutout/missdior.png" alt="about" width={100} height={100} />
