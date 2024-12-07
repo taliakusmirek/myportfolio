@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
 import Nav from '../../components/Navigation';
 import Footer from '../../components/Footer';
 
@@ -204,7 +203,7 @@ export default function Home() {
                 >
                   <div>
                     <Image src={category.imageSrc} alt={category.name} width={100} height={100} />
-                    <span className="text-base-mobile sm:text-base-desktop font-Script mt-2">{category.name}</span>
+                    <span className="text-h1 font-Script mt-2">{category.name}</span>
                   </div>
                 </li>
               ))}
@@ -255,7 +254,7 @@ export default function Home() {
               exit={{ scale: 0.5 }}
             >
               <h2 
-                className={`text-lg font-bold text-brand-Bold-Red font-Script ${
+                className={`text-h1 font-bold text-brand-Bold-Red font-Script ${
                   selectedProject.githubLink 
                     ? 'cursor-pointer hover:underline' 
                     : ''

@@ -44,7 +44,7 @@ export default function Contact() {
       <Nav />
 
       <main className="p-4">
-        <h1 className="text-h1-mobile sm:text-h1-desktop flex justify-center mt-14 mb-6 text-brand-Bold-Red">let's chat.</h1>
+        <h1 className="text-h1-mobile sm:text-h1-desktop flex justify-center mt-14 mb-6 text-brand-Bold-Red">  let&apos;s chat.</h1>
         <div className="flex justify-center items-center">
           <Image
             src="/cutout/flat.png"
@@ -57,7 +57,7 @@ export default function Contact() {
 
         {!isSubmitted ? (
         <div className="max-w-2xl mx-auto p-6">
-          <form action="#" method="POST">
+          <form action="#" method="POST" onSubmit={handleSubmit}>
             {/* Email */}
             <div className="mb-4">
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">email</label>

@@ -56,10 +56,10 @@ export default function About() {
         {/* Title without typewriter effect */}
         <div className="flex justify-center">
           <h1
-            className="text-h1-mobile md:text-h2-desktop mt-20 mb-20 text-brand-Bold-Red flex justify-center"
+            className="text-h1-mobile md:text-h1-desktop mt-20 mb-20 text-brand-Bold-Red flex justify-center"
             style={{ whiteSpace: 'nowrap' }}
           >
-            i've been pretty busy...
+          i&apos;ve been pretty busy...
           </h1>
         </div>
         <div className="grid justify-items-center gap-8 px-4 sm:px-10 py-10 auto-rows-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-16 pb-16 sm:pb-24">
@@ -95,7 +95,7 @@ export default function About() {
               >
                 <h2
                   className={`
-                    text-xl font-Script 
+                    text-xl font-Rubik 
                     ${hoveredCard === index ? 'text-white' : 'text-brand-Bold-Red'} 
                     text-center whitespace-nowrap
                   `}
