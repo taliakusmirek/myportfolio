@@ -2,8 +2,6 @@
 import Nav from '../../components/Navigation';
 import Footer from '../../components/Footer';
 
-import { useState } from 'react';
-
 export default function Privacy() {
   return (
     <div>
@@ -26,7 +24,7 @@ export default function Privacy() {
             <ul className="list-disc pl-6">
               <li><strong>Personal Information:</strong> If you contact me via the website (e.g., through a contact form or email), you may provide personal information such as your name, email address, and any additional details you choose to share.</li>
               <li><strong>Usage Data:</strong> I may collect non-personal information about how visitors interact with the site. This includes data such as IP addresses, browser type, device information, and pages visited. This information helps me improve the user experience and analyze site performance.</li>
-              <li><strong>Pinterest API Data:</strong> To provide trend insights for fashion and outfit recommendations, I use Pinterest's API to gather data related to trending keywords and other relevant trend metrics. This information may include trending keywords, percentages of growth, and time series data for fashion-related trends. Pinterest API data is used solely for the purpose of enhancing the trend analysis feature on this site. Pinterest's API access is provided under their terms and conditions, and the data received is treated with the utmost care and responsibility.</li>
+              <li><strong>Pinterest API Data:</strong> To provide trend insights for fashion and outfit recommendations, I use Pinterest&apos;s API to gather data related to trending keywords and other relevant trend metrics. This information may include trending keywords, percentages of growth, and time series data for fashion-related trends. Pinterest API data is used solely for the purpose of enhancing the trend analysis feature on this site. Pinterest&apos;s API access is provided under their terms and conditions, and the data received is treated with the utmost care and responsibility.</li>
               <li><strong>Cookies:</strong> My website may use cookies and similar technologies to collect and store information when you visit. Cookies help me enhance your browsing experience by remembering preferences and ensuring the site functions as expected. You can control the use of cookies through your browser settings.</li>
             </ul>
 
@@ -36,7 +34,7 @@ export default function Privacy() {
               <li>To respond to inquiries or requests you make through the contact form or other communication channels.</li>
               <li>To improve the performance, usability, and design of my website.</li>
               <li>To analyze how users interact with my site and improve the overall user experience.</li>
-              <li>To provide trend-based outfit recommendations and fashion insights by utilizing data collected from Pinterest's API.</li>
+              <li>To provide trend-based outfit recommendations and fashion insights by utilizing data collected from Pinterest&apos;s API.</li>
               <li>To maintain security, troubleshoot issues, and protect the integrity of the site.</li>
             </ul>
 
@@ -44,7 +42,7 @@ export default function Privacy() {
             <p>I may use third-party services to analyze website traffic or improve functionality. These third-party services may collect information about your activity on my site. This includes:</p>
             <ul className="list-disc pl-6">
               <li><strong>Google Analytics:</strong> To monitor website traffic and usage patterns.</li>
-              <li><strong>Pinterest API:</strong> To access real-time trend data on fashion-related keywords and topics for personalized recommendations. By using Pinterest’s API, I can collect data on popular trends and seasonal fashion styles to improve the outfit recommendation system. Pinterest's data is collected in accordance with Pinterest’s privacy policies and terms of service.</li>
+              <li><strong>Pinterest API:</strong> To access real-time trend data on fashion-related keywords and topics for personalized recommendations. By using Pinterest&apos;s API, I can collect data on popular trends and seasonal fashion styles to improve the outfit recommendation system. Pinterest&apos;s data is collected in accordance with Pinterest’s privacy policies and terms of service.</li>
             </ul>
 
             <h2 className="mt-6 text-xl font-semibold">4. Data Retention</h2>
