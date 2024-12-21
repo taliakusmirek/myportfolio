@@ -27,7 +27,7 @@ export default function About() {
       image: { src: "/cutout/scarf.png", width: 60, height: 70 },
       text: `Building a personal brand has been an exciting journey, blending creativity, technical skill, and entrepreneurial vision...`,
       specialClass: "brand-card-adjust",
-      hoverText: "My personal brand is a dynamic narrative of innovation, combining technical expertise with my passion for fashion to create fun projects for users to try."
+      hoverText: "My personal brand is a dynamic narrative of innovation, combining technical expertise with my passion for neuroscience to create fun projects for users to improve their mental health."
     },
     {
       title: "studying in Boston",
