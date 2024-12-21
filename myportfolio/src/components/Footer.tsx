@@ -10,7 +10,7 @@ export default function Footer() {
                 </a>
             </div>
             <h4 className="mt-4">made by talia kusmirek</h4>
-            <p className="text-xs mb-4">last updated November 2024</p>
+            <p className="text-xs mb-4">last updated December 2024</p>
         </div>
     );
 }

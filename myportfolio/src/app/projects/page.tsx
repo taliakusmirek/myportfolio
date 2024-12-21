@@ -30,78 +30,10 @@ export default function Home() {
   // Define categories with proper types
   const categories: Category[] = [
     {
-      name: 'fashion',
-      imageSrc: '/cutout/miumiu.png',
+      name: 'mental health',
+      imageSrc: '/cutout/blackbag.png',
       projects: [
-        { 
-          title: 'myCloset', 
-          imageSrc: '/cutout/christian.png', 
-          description: `A digital wardrobe management application designed to revolutionize 
-          personal fashion organization and styling.
-    
-          The app aims to provide users with an intuitive interface to catalog 
-          their clothing items, create outfit combinations, and track their 
-          wardrobe inventory.
-    
-          Features include item categorization, outfit planning, and style recommendations.`,
-          techStack: 'React Native, TypeScript, Firebase',
-          dateRange: 'Winter 2024',
-          githubLink: undefined,
-          imageWidth: 150,
-          imageHeight: 150
-        },
-        { 
-          title: 'Focal', 
-          imageSrc: '/cutout/bucket.png', 
-          description: `An innovative fashion recommendation platform that leverages 
-          machine learning to provide personalized style suggestions.
-    
-          The application analyzes user preferences, body type, and current 
-          fashion trends to curate unique outfit recommendations.
-    
-          Designed to help users discover new styles and build confidence 
-          in their fashion choices.`,
-          techStack: 'Python, Machine Learning, React',
-          dateRange: 'Winter 2025',
-          githubLink: undefined,
-          imageWidth: 150,
-          imageHeight: 150
-        },
-        { 
-          title: 'W.F.B.', 
-          imageSrc: '/cutout/jean.png', 
-          description: `A sustainable fashion marketplace that connects conscious 
-          consumers with eco-friendly and ethical fashion brands.
-    
-          The platform focuses on promoting sustainable fashion choices, 
-          providing transparency about clothing production, and supporting 
-          environmentally responsible designers.
-    
-          Features include brand stories, sustainability ratings, and 
-          curated collections of ethical fashion.`,
-          techStack: 'Django, PostgreSQL, React',
-          dateRange: 'Spring 2025',
-          githubLink: undefined,
-          imageWidth: 150,
-          imageHeight: 150
-        },
-        { 
-          title: 'Trends Tracker', 
-          imageSrc: '/cutout/bow.png', 
-          description: `A comprehensive fashion trend analysis and forecasting tool 
-          that aggregates data from social media, fashion weeks, and 
-          online shopping platforms.
-    
-          Utilizes advanced data analytics to predict upcoming fashion trends, 
-          providing insights for designers, retailers, and fashion enthusiasts.
-    
-          Offers real-time trend visualization and predictive trend mapping.`,
-          techStack: 'Data Science, React, Machine Learning',
-          dateRange: 'Spring 2025',
-          githubLink: undefined,
-          imageWidth: 150,
-          imageHeight: 150
-        },
+        
       ],
     },
     {
@@ -133,19 +65,19 @@ export default function Home() {
           imageHeight: 150
         },
         { 
-          title: 'Advocato', 
-          imageSrc: '/cutout/prada.png', 
-          description: `Advocato is an online platform designed to support the assessment and management 
-          of domestic violence cases in Spain. 
+          title: 'myCloset', 
+          imageSrc: '/cutout/christian.png', 
+          description: `A digital wardrobe management application designed to revolutionize 
+          personal fashion organization and styling.
     
-          Built with Django, this project aligns with the United Nations Sustainable Development Goals (SDG), 
-          particularly SDG 5: Gender Equality and SDG 16: Peace, Justice, and Strong Institutions. 
+          The app aims to provide users with an intuitive interface to catalog 
+          their clothing items, create outfit combinations, and track their 
+          wardrobe inventory.
     
-          Advocato aims to improve the accuracy and comprehensiveness of domestic violence risk assessments, 
-          starting with Spain and potentially expanding to other regions.`,
-          techStack: 'Django, Python, Tensorflow',
-          dateRange: 'Fall 2023',
-          githubLink: 'https://github.com/taliakusmirek/Advocato-SpainDomesticViolence-Chatbot',
+          Features include item categorization, outfit planning, and style recommendations.`,
+          techStack: 'React Native, TypeScript, Firebase',
+          dateRange: 'Winter 2024',
+          githubLink: "https://github.com/taliakusmirek/myCloset",
           imageWidth: 150,
           imageHeight: 150
         },

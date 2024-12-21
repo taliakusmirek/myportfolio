@@ -11,14 +11,14 @@ export default function About() {
   const content = [
     {
       title: "advocating AI ethics",
-      image: { src: "/cutout/blackbag.png", width: 60, height: 100 },
+      image: { src: "/cutout/blackbag.png", width: 70, height: 100 },
       text: `As a Core Member of Innovate For Everyone and the United Nations' 'AI For Good' Program, I dedicate time to promoting responsible AI practices...`,
       specialClass: "blackbag-card-adjust",
       hoverText: "My work in AI ethics focuses on ensuring technological advancements address potential biases and promoting responsible innovation that benefits society as a whole."
     },
     {
       title: "building Ophelia",
-      image: { src: "/cutout/missdior.png", width: 80, height: 100 },
+      image: { src: "/cutout/blazer.png", width: 80, height: 100 },
       text: `At Ophelia, I contribute as a Software Engineer, focusing on the development and optimization of a dating web app...`,
       hoverText: "Developing Ophelia involves creating an intuitive, secure, and engaging platform that reimagines digital dating through innovative technology and user-centric design."
     },
@@ -110,7 +110,7 @@ export default function About() {
                     item.specialClass === 'brand-card-adjust' 
                       ? 'justify-end absolute right-2 top-1/2 -translate-y-1/2' 
                     : item.specialClass === 'dior-card-adjust'
-                      ? 'ml-8'
+                      ? 'ml-10'
                     : item.specialClass === 'blackbag-card-adjust'
                       ? 'ml-6'
                     : ''
@@ -123,11 +123,11 @@ export default function About() {
                     height={item.image.height}
                     className={`${
                       item.specialClass === 'brand-card-adjust' 
-                        ? 'mr-0 mt-20' 
+                        ? 'mr-0 mt-0' 
                       : item.specialClass === 'blackbag-card-adjust'
                         ? '-mt-4 ml-2'
                       : item.specialClass === 'dior-card-adjust'
-                        ? '-mt-10'
+                        ? '-mt-2'
                       : '-mt-6 ml-2'
                     }`}
                   />

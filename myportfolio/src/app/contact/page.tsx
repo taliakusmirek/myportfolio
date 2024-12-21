@@ -47,7 +47,7 @@ export default function Contact() {
         <h1 className="text-h1-mobile sm:text-h1-desktop flex justify-center mt-14 mb-6 text-brand-Bold-Red">  let&apos;s chat.</h1>
         <div className="flex justify-center items-center">
           <Image
-            src="/cutout/flat.png"
+            src="/cutout/scarf.png"
             alt="flat"
             width={250}
             height={250}
