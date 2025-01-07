@@ -55,12 +55,12 @@ export default function Home() {
           imageHeight: 150
         },
         { 
-          title: 'Nebula: Vector DB', 
+          title: 'TechMargin', 
           imageSrc: '/cutout/ysl.png', 
-          description: 'Work in progress! Github link up soon.',
-          techStack: 'Rust, C, RestAPI, Docker',
-          dateRange: 'Ongoing',
-          githubLink: undefined,
+          description: 'Web-app tool designed to help e-commerce suppliers find the optimal price point for their products. By leveraging market prices, the cost of goods sold (COGS), and inventory data, TechMargin calculates a predicted price that can help suppliers achieve better profit margins while staying competitive.',
+          techStack: 'NextJS, Supabase, RestAPI',
+          dateRange: 'Winter 2025',
+          githubLink: 'https://github.com/taliakusmirek/TechMargin/tree/main',
           imageWidth: 150,
           imageHeight: 150
         },
