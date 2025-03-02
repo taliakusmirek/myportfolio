@@ -10,15 +10,9 @@ export default {
     extend: {
       colors: {
         background: "var(--background)",
-        'brand-Bold-Red': "#378CE7",
-        'brand-Bold-Red-700' : "#378CE7",
-        'brand-Poppy-Rose': "#C38E93",
-        'brand-Poppy-Rose-100': "#ECDCDE",
-        'brand-Warm-Grey': "#DDD8D2",
-        'brand-Warm-Grey-100': "#F4F3F1",
-        'brand-Muted-Grey': "#827573",
-        'brand-Dark-Grey': "#544B49",
-        'brand-Dark': "#000000"
+        'brand-Bold-Red': "#F61010",
+        'brand-Dark': "#000000",
+        'brand-White' : "#FFFFFF"
       },
       screens: {
         'xs': '375px',     // Small mobile
@@ -50,8 +44,9 @@ export default {
         }],
       },
       fontFamily: {
-        Script: ['Script', 'sans-serif'],
-        Rubik: ['Rubik', 'Arial'],
+        Inter: ['Inter', 'sans-serif'],
+        Gascogne: ['Gascogne', 'Arial'],
+        Perandory: ['Perandory', 'Arial'],
       },
     },
   },

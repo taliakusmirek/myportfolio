@@ -1,184 +1,121 @@
-'use client'
-import Image from 'next/image';
-import Nav from '../../components/Navigation';
-import Footer from '../../components/Footer';
-import { useState, useEffect } from 'react';
+'use client';
+import Link from 'next/link';
+import { useState, useLayoutEffect, useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { usePathname } from 'next/navigation';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const [cardsVisible, setCardsVisible] = useState<boolean[]>([]);
+  const sectionsRef = useRef<Element[]>([]);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const content = [
-    {
-      title: "advocating AI ethics",
-      image: { src: "/cutout/blackbag.png", width: 70, height: 100 },
-      text: `As a Core Member of Innovate For Everyone and the United Nations' 'AI For Good' Program, I dedicate time to promoting responsible AI practices...`,
-      specialClass: "blackbag-card-adjust",
-      hoverText: "My work in AI ethics focuses on ensuring technological advancements address potential biases and promoting responsible innovation that benefits society as a whole."
-    },
-    {
-      title: "building Ophelia",
-      image: { src: "/cutout/blazer.png", width: 80, height: 100 },
-      text: `At Ophelia, I contribute as a Software Engineer, focusing on the development and optimization of a dating web app...`,
-      hoverText: "Developing Ophelia involves creating an intuitive, secure, and engaging platform that reimagines digital dating through innovative technology and user-centric design."
-    },
-    {
-      title: "growing my brand",
-      image: { src: "/cutout/scarf.png", width: 60, height: 70 },
-      text: `Building a personal brand has been an exciting journey, blending creativity, technical skill, and entrepreneurial vision...`,
-      specialClass: "brand-card-adjust",
-      hoverText: "My personal brand is a dynamic narrative of innovation, combining technical expertise with my passion for neuroscience to create fun projects for users to improve their mental health."
-    },
-    {
-      title: "studying in Boston",
-      image: { src: "/cutout/dior.png", width: 80, height: 100 },
-      text: `Pursuing a dual concentration in Computer Science and Business Analytics at Boston College...`,
-      specialClass: "dior-card-adjust",
-      hoverText: "My academic journey at Boston College bridges technical computing skills with strategic business insights, preparing me to be a versatile tech innovator."
-    },
-  ];
+  useLayoutEffect(() => {
+    if (!containerRef.current) return;
 
-  // Handle the fade-in for each card
-  useEffect(() => {
-    const timers = content.map((_, index) =>
-      setTimeout(() => {
-        setCardsVisible((prev) => [...prev, true]);
-      }, index * 300) // Adjust delay between card appearances
-    );
+    const sections = containerRef.current.querySelectorAll('.section');
+    sectionsRef.current = Array.from(sections);
 
-    return () => timers.forEach((timer) => clearTimeout(timer));
+    const ctx = gsap.context(() => {
+      const totalWidth = sections.length * window.innerWidth; // Fix width calculation
+
+      gsap.to(sections, {
+        x: () => `-${totalWidth - window.innerWidth}px`,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          pin: true,
+          scrub: 1,
+          start: 'top top',
+          end: () => `+=${totalWidth}`,
+          anticipatePin: 1,
+          invalidateOnRefresh: true, // Fix resizing issues
+        },
+      });
+
+      gsap.from('.section h1, .section h2, .section p', {
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        stagger: 0.3,
+        ease: 'power2.out',
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
+  // Re-run animation on route change
+  const pathname = usePathname();
+
+useEffect(() => {
+  const handleRouteChange = () => {
+    setTimeout(() => ScrollTrigger.refresh(), 500);
+  };
+
+  handleRouteChange(); // Call when the pathname changes
+
+}, [pathname]);
+
   return (
-    <div>
-      <Nav />
-      <main className="p-4 mt-8">
-        {/* Title without typewriter effect */}
-        <div className="flex justify-center">
-          <h1
-            className="text-h1-mobile md:text-h1-desktop mt-20 mb-20 text-brand-Bold-Red flex justify-center"
-            style={{ whiteSpace: 'nowrap' }}
-          >
-          i&apos;ve been pretty busy...
-          </h1>
-        </div>
-        <div className="grid justify-items-center gap-8 px-4 sm:px-10 py-10 auto-rows-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-16 pb-16 sm:pb-24">
-          {content.map((item, index) => (
-            <div
-              key={index}
-              className={`
-                relative border-2 border-brand-Bold-Red rounded-lg p-6 mb-14 
-                transition-all duration-300 ease-in-out 
-                ${item.specialClass || ''} 
-                ${hoveredCard === index ? 'bg-brand-Bold-Red text-white' : ''}
-                w-full max-w-[360px] min-h-[200px] 
-                ${cardsVisible[index] ? 'fade-in' : 'opacity-0'}
-              `}
-              onMouseEnter={() => setHoveredCard(index)}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              <div
-                className={`
-                  absolute top-0 left-1/2 transform -translate-x-1/2 
-                  ${
-                    item.specialClass === 'brand-card-adjust' 
-                      ? '-translate-y-12' 
-                    : item.specialClass === 'dior-card-adjust'
-                      ? '-translate-y-16'
-                    : item.specialClass === 'blackbag-card-adjust'
-                      ? '-translate-y-16'
-                    : '-translate-y-16'
-                  } 
-                  px-2.5 flex items-center z-20 w-full
-                `}
-                style={{ height: `${item.image.height}px` }}
-              >
-                <h2
-                  className={`
-                    text-xl font-Rubik 
-                    ${hoveredCard === index ? 'text-white' : 'text-brand-Bold-Red'} 
-                    text-center whitespace-nowrap
-                  `}
-                  style={{
-                    maxWidth: `${item.image.width + 150}px`,
-                  }}
-                >
-                  {item.title}
-                </h2>
-                <div 
-                  className={`ml-2 flex ${
-                    item.specialClass === 'brand-card-adjust' 
-                      ? 'justify-end absolute right-2 top-1/2 -translate-y-1/2' 
-                    : item.specialClass === 'dior-card-adjust'
-                      ? 'ml-10'
-                    : item.specialClass === 'blackbag-card-adjust'
-                      ? 'ml-6'
-                    : ''
-                  }`}
-                >
-                  <Image
-                    src={item.image.src}
-                    alt={item.title}
-                    width={item.image.width}
-                    height={item.image.height}
-                    className={`${
-                      item.specialClass === 'brand-card-adjust' 
-                        ? 'mr-0 mt-0' 
-                      : item.specialClass === 'blackbag-card-adjust'
-                        ? '-mt-4 ml-2'
-                      : item.specialClass === 'dior-card-adjust'
-                        ? '-mt-2'
-                      : '-mt-6 ml-2'
-                    }`}
-                  />
-                </div>
-              </div>
-              
-              <div className="relative">
-                {/* Original text */}
-                <div 
-                  className={`
-                    absolute top-10 left-0 right-0 transition-all duration-300 ease-in-out 
-                    ${hoveredCard === index 
-                      ? 'opacity-0' 
-                      : 'opacity-100'
-                    }
-                  `}
-                >
-                  <p className={`
-                    text-sm 
-                    ${hoveredCard === index ? 'text-transparent' : ''}
-                    transition-colors duration-300
-                  `}>
-                    {item.text}
-                  </p>
-                </div>
-                
-                {/* Hover text */}
-                <div 
-                  className={`
-                    absolute top-10 left-0 right-0 transition-all duration-300 ease-in-out
-                    ${
-                      hoveredCard === index 
-                        ? 'opacity-100 visible translate-y-0' 
-                        : 'opacity-0 invisible translate-y-10'
-                    }
-                  `}
-                >
-                  <p className={`
-                    text-sm 
-                    ${hoveredCard === index ? 'text-white' : 'text-black'}
-                    transition-colors duration-300
-                  `}>
-                    {item.hoverText}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </main>
-      <Footer />
+    <div className="flex flex-col min-h-screen relative bg-[#F61010] text-black">
+      {/* Mobile Menu */}
+      <div className="absolute top-4 right-4 md:hidden">
+        <button onClick={() => setMenuOpen(!menuOpen)} className="text-lg font-bold">☰</button>
+      </div>
+
+      <div
+        className={`fixed inset-0 bg-black text-[#F61010] flex flex-col items-center justify-center space-y-6 text-2xl font-bold font-Gascogne transition-transform duration-300 ${
+          menuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+        } md:hidden`}
+      >
+        <button onClick={() => setMenuOpen(false)} className="absolute top-4 right-4 text-3xl">✕</button>
+        <Link href="/about" onClick={() => setMenuOpen(false)}>ABOUT</Link>
+        <Link href="/works" onClick={() => setMenuOpen(false)}>MY WORK</Link>
+        <Link href="/obsessions" onClick={() => setMenuOpen(false)}>OBSESSIONS</Link>
+        <Link href="/resume" onClick={() => setMenuOpen(false)}>RESUME</Link>
+        <Link href="/contact" onClick={() => setMenuOpen(false)}>CONTACT</Link>
+      </div>
+
+      {/* Horizontal Scroll Container */}
+      <div ref={containerRef} className="flex min-h-screen overflow-x-hidden bg-[#F61010] text-black">
+        <section className="section flex flex-col justify-start items-start px-16 pt-16 min-w-screen">
+          <h1 className="text-[18vw] font-Perandory">ABOUT</h1>
+        </section>
+
+        <section className="section flex flex-col justify-center items-start text-left px-16 min-w-screen">
+          <h2 className="text-3xl font-bold font-Inter">PAST ROLES</h2>
+          <p className="mt-4 text-xl font-Inter">
+            software engineer intern @ <a href="https://opheliadating.com/" target="_blank" className="font-bold no-underline">ophelia</a><br />
+            first american scholar @ <a href="https://www.linkedin.com/posts/talia-kusmirek-b0421b289_aiforgood-un-aiforgood-activity-7188588038422167554-R5gy/" target="_blank" className="font-bold no-underline">ai for good @ united nations</a><br />
+            research student @ <a href="https://cybersecurity.sites.ccsu.edu/" target="_blank" className="font-bold no-underline">ccsu</a><br />
+            front-end software engineer intern @ <a href="https://www.techforgoodinc.org/" target="_blank" className="font-bold no-underline">tech for good inc.</a>
+          </p>
+        </section>
+
+        <section className="section flex flex-col justify-center items-start text-left px-16 min-w-screen">
+          <h2 className="text-3xl font-bold font-Inter">CURRENT ROLES</h2>
+          <p className="mt-4 text-xl font-Inter">
+            tech team @ <a href="https://bc.campuslabs.com/engage/organization/computer-science-society" target="_blank" className="font-bold no-underline">bccss</a><br />
+            tech lead @ <a href="https://bcmig.onrender.com/" target="_blank" className="font-bold no-underline">mig</a><br />
+            core team member @ <a href="https://www.innoforeveryone.org/" target="_blank" className="font-bold no-underline">innovation for everyone</a><br />
+            mentor @ <a href="https://aiforgood.itu.int/innovate-for-impact/" target="_blank" className="font-bold no-underline">ai for good</a>
+          </p>
+        </section>
+      </div>
+
+      {/* Navigation Links */}
+      <div className="absolute top-4 right-4 text-xl hidden md:flex flex-col items-end font-Gascogne">
+        <Link href="/" prefetch={false}>HOME</Link>
+      </div>
+      <div className="absolute bottom-4 left-4 text-xl hidden md:block font-Gascogne">
+        <Link href="https://drive.google.com/file/d/1ZlXPqvFE0gs2E72TYkKF0d6iQtd9Fpte/view?usp=sharing" prefetch={false}>RESUME</Link>
+      </div>
+      <div className="absolute bottom-4 right-4 text-xl hidden md:block font-Gascogne">
+        <Link href="/contact" prefetch={false}>CONTACT</Link>
+      </div>
     </div>
   );
 }

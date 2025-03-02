@@ -1,127 +1,96 @@
-'use client'
-import Nav from '../../components/Navigation';
-import Footer from '../../components/Footer';
+'use client';
+import Link from 'next/link';
+import { useState, useLayoutEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
+import { Linkedin, Github, Instagram, Mail } from 'lucide-react';
+import gsap from 'gsap';
 
-import Image from 'next/image';
-import { useState } from 'react';
-      
-export default function Contact() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('')
-  const [message, setMessage] = useState('')
+export default function Home() {
+  const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const mainRef = useRef(null);
+  const textRef = useRef(null);
+  const socialRef = useRef(null);
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+  useLayoutEffect(() => {
+    const tl = gsap.timeline();
+    
+    tl.fromTo(
+      mainRef.current, 
+      { opacity: 0 }, 
+      { opacity: 1, duration: 1 }
+    )
+    .fromTo(
+      textRef.current, 
+      { y: 50, opacity: 0 }, 
+      { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
+      '-=0.5'
+    )
+    .fromTo(
+      socialRef.current, 
+      { y: 20, opacity: 0 }, 
+      { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
+      '-=0.5'
+    );
 
-    try {
-      const res = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, subject, message }),
-      });
-
-      const result = await res.json();
-
-      if (res.status === 200) {
-        setIsSubmitted(true); // Show thank you message
-        setEmail('');
-        setSubject('');
-        setMessage('');
-      } else {
-        alert(result.error || 'Something went wrong');
-      }
-    } catch (error) {
-      console.error('Error sending email:', error);
-      alert('Failed to send email');
-    }
-  };
+    return () => {
+      tl.kill(); // Prevent animations stacking
+    };
+  }, [pathname]);
 
   return (
-    <div>
-      <Nav />
-
-      <main className="p-4">
-        <h1 className="text-h1-mobile sm:text-h1-desktop flex justify-center mt-14 mb-6 text-brand-Bold-Red">  let&apos;s chat.</h1>
-        <div className="flex justify-center items-center">
-          <Image
-            src="/cutout/scarf.png"
-            alt="flat"
-            width={250}
-            height={250}
-            className="ml-2"
-          />
+    <div ref={mainRef} className="flex flex-col min-h-screen relative bg-[#F61010] text-black opacity-0">
+      <div className="absolute top-4 right-4 md:hidden">
+        <button onClick={() => setMenuOpen(!menuOpen)} className="text-lg font-bold">
+          ☰
+        </button>
+      </div>
+      
+      <div
+        className={`fixed inset-0 bg-black text-[#F61010] flex flex-col items-center justify-center space-y-6 text-2xl font-bold font-Gascogne transition-transform duration-300 ${menuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'} md:hidden`}
+      >
+        <button onClick={() => setMenuOpen(false)} className="absolute top-4 right-4 text-3xl">
+          ✕
+        </button>
+        <Link href="/about" onClick={() => setMenuOpen(false)}>ABOUT</Link>
+        <Link href="/works" onClick={() => setMenuOpen(false)}>MY WORKS</Link>
+        <Link href="/obsessions" onClick={() => setMenuOpen(false)}>OBSESSIONS</Link>
+        <Link href="/resume" onClick={() => setMenuOpen(false)}>RESUME</Link>
+        <Link href="/contact" onClick={() => setMenuOpen(false)}>CONTACT</Link>
+      </div>
+      
+      <div className="absolute top-4 left-4 text-xl hidden md:block font-Gascogne">
+        <Link href="https://drive.google.com/file/d/1ZlXPqvFE0gs2E72TYkKF0d6iQtd9Fpte/view?usp=sharing" prefetch={false}>RESUME</Link>
+      </div>
+      
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-center text-xs font-bold">
+        <p>BASED IN BOSTON, MA.</p>
+        <p>SOPHOMORE AT BOSTON COLLEGE, DOUBLE MAJORING IN CS AND BUSINESS.</p>
+      </div>
+      
+      <div className="absolute top-4 right-4 text-xl flex flex-col space-y-2 items-end hidden md:flex font-Gascogne">
+        <Link href="/" prefetch={false}>HOME</Link>
+      </div>
+      
+      <main className="flex flex-grow flex-col items-center justify-center">
+        <h1 ref={textRef} className="text-[20vw] font-gascogne uppercase text-center leading-none opacity-0">
+          LET&apos;S CHAT.
+        </h1>
+        <div ref={socialRef} className="mt-4 flex space-x-6 opacity-0">
+          <a href="https://www.linkedin.com/in/talia-kusmirek-b0421b289/">
+            <Linkedin size={40} />
+          </a>
+          <a href="https://github.com/taliakusmirek">
+            <Github size={40} />
+          </a>
+          <a href="https://instagram.com/taliadouceur">
+            <Instagram size={40} />
+          </a>
+          <a href="mailto:kusmire@bc.edu">
+            <Mail size={40} />
+          </a>
         </div>
-
-        {!isSubmitted ? (
-        <div className="max-w-2xl mx-auto p-6">
-          <form action="#" method="POST" onSubmit={handleSubmit}>
-            {/* Email */}
-            <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder=""
-                className="mt-1 block w-full p-3  border-brand-Bold-Red border-2 rounded-md "
-              />
-            </div>
-
-            {/* Subject */}
-            <div className="mb-4">
-              <label htmlFor="subject" className="block text-sm font-medium text-gray-700">subject</label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                required
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-                placeholder=""
-                className="mt-1 block w-full p-3  border-brand-Bold-Red border-2 rounded-md"
-              />
-            </div>
-
-            {/* Message */}
-            <div className="mb-4">
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700">message</label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder=""
-                className="mt-1 block w-full p-3  border-brand-Bold-Red border-2 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-              ></textarea>
-            </div>
-
-            {/* Submit Button */}
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="w-full sm:w-auto py-2 px-6 text-brand-Bold-Red font-bold rounded-md hover:bg-brand-Bold-Red-dark focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                send
-              </button>
-            </div>
-          </form>
-        </div>
-        ) : (
-          // Show the thank you message after form submission
-          <div className="max-w-2xl mx-auto text-center">
-            <h1 className="text-xl font-medium text-brand-Bold-Red ">Thank you!</h1>
-            <p className="mt-5">We have received your message and will get back to you soon.</p>
-          </div>
-        )}
       </main>
-      <Footer />
     </div>
   );
 }

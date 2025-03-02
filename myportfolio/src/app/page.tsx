@@ -1,55 +1,88 @@
-import Image from 'next/image';
+'use client';
 import Link from 'next/link';
-import Footer from '../components/Footer';
+import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
+import gsap from 'gsap';
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const menuLinksRef = useRef<(HTMLAnchorElement | null)[]>([]);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline();
+  
+      tl.from(titleRef.current, { opacity: 0, y: 50, duration: 1, ease: 'power3.out' })
+        .from(subtitleRef.current, { opacity: 0, y: 30, duration: 1.2, ease: 'power3.out' })
+        .from(menuLinksRef.current, { opacity: 0, y: 20, duration: 1, stagger: 0.1, ease: 'power3.out' });
+    });
+  
+    return () => ctx.revert(); 
+  }, [pathname]); 
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="flex justify-center items-center -mt-12 -mb-16"> {/* Keep the logo outside the main flex container */}
-        <Link href="/">
-          <Image 
-            src="/logo.png" 
-            alt="Logo" 
-            width={220} 
-            height={220} 
-          />
-        </Link>
-      </header>
+    <div className="flex flex-col min-h-screen relative bg-[#F61010] text-black">
+      <div className="absolute top-4 right-4 md:hidden">
+        <button onClick={() => setMenuOpen(!menuOpen)} className="text-lg font-bold">
+          ☰
+        </button>
+      </div>
+      
+      {/* Fullscreen Mobile Dropdown Menu */}
+      <div
+  className={`fixed inset-0 bg-black text-[#F61010] flex flex-col items-center justify-center space-y-6 text-2xl font-bold font-Gascogne transition-transform duration-300 ${
+    menuOpen ? 'translate-x-0 opacity-100 z-50 pointer-events-auto' : 'translate-x-full opacity-0 z-[-1] pointer-events-none'
+  } md:hidden`}
+>
+  <button onClick={() => setMenuOpen(false)} className="absolute top-4 right-4 text-3xl">
+    ✕
+  </button>
+  {['/about', '/works', '/obsessions', '/resume', '/contact'].map((href, index) => (
+    <Link
+    key={index}
+    href={href}
+    onClick={() => setMenuOpen(false)}
+    ref={(el) => {
+      menuLinksRef.current[index] = el;
+    }}
+  >
+    {href.replace('/', '').toUpperCase()}
+  </Link>
+  
+  ))}
+</div>
 
-      <main className="flex-grow flex items-center justify-center">
-        <div className="text-center">
-          <div className="flex justify-center items-center mt-8"> {/* Adjust space between the logo and content */}
-          <ul className="flex flex-col items-center space-y-10 sm:flex-row sm:space-y-16 sm:space-x-20"> {/* Responsive layout */}
-              <li className="flex flex-col items-center">
-                <Link href="/about">
-                  <Image src="/cutout/missdior.png" alt="about" width={100} height={100} />
-                </Link>
-                <a href="/about" className="text-base-mobile sm:text-base-desktop">about</a>
-              </li>
-              <li className="flex flex-col items-center">
-                <Link href="/projects">
-                  <Image src="/cutout/blazer.png" alt="projects" width={80} height={80} />
-                </Link>
-                <a href="/projects" className="text-base-mobile sm:text-base-desktop">projects</a>
-              </li>
-              <li className="flex flex-col items-center">
-                <Link href="/contact">
-                  <Image src="/cutout/flat.png" alt="contact" width={100} height={100} />
-                </Link>
-                <a href="/contact" className="text-base-mobile sm:text-base-desktop">contact</a>
-              </li>
-              <li className="flex flex-col items-center">
-                <Link href="https://drive.google.com/file/d/1ZlXPqvFE0gs2E72TYkKF0d6iQtd9Fpte/view?usp=sharing">
-                  <Image src="/cutout/scarf.png" alt="résumé" width={70} height={70} />
-                </Link>
-                <a href="https://drive.google.com/file/d/1ZlXPqvFE0gs2E72TYkKF0d6iQtd9Fpte/view?usp=sharing" target="_blank" className="text-base-mobile sm:text-base-desktop">résumé</a>
-              </li>
-            </ul>
-          </div>
-        </div>
+      
+      <div className="absolute top-4 left-4 text-xl hidden md:block font-Gascogne">
+        <Link href="/about" prefetch={false}>ABOUT</Link>
+      </div>
+      
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-center text-xs font-bold" ref={subtitleRef}>
+        <p>BASED IN BOSTON, MA.</p>
+        <p>SOPHOMORE AT BOSTON COLLEGE, DOUBLE MAJORING IN CS AND BUSINESS.</p>
+      </div>
+      
+      <div className="absolute top-4 right-4 text-xl flex flex-col space-y-2 items-end hidden md:flex font-Gascogne">
+        <Link href="/works" prefetch={false}>MY WORK</Link>
+        <Link href="/obsessions" prefetch={false}>OBSESSIONS</Link>
+      </div>
+      
+      <main className="flex flex-grow items-center justify-center">
+        <h1 ref={titleRef} className="text-[18vw] font-gascogne uppercase text-center leading-none">
+          TALIA <br /> KUSMIREK
+        </h1>
       </main>
-
-      <Footer />
+      
+      <div className="absolute bottom-4 left-4 text-xl hidden md:block font-Gascogne">
+        <Link href="https://drive.google.com/file/d/1ZlXPqvFE0gs2E72TYkKF0d6iQtd9Fpte/view?usp=sharing" prefetch={false}>RESUME</Link>
+      </div>
+      
+      <div className="absolute bottom-4 right-4 text-xl hidden md:block font-Gascogne">
+        <Link href="/contact" prefetch={false}>CONTACT</Link>
+      </div>
     </div>
   );
 }
