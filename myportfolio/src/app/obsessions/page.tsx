@@ -97,7 +97,7 @@ export default function Obsessions() {
         <Link href="/">HOME</Link>
       </div>
       <div className="absolute bottom-4 left-4 text-xl hidden md:block font-Gascogne">
-        <Link href="/resume">RESUME</Link>
+        <Link href="https://drive.google.com/file/d/1ZlXPqvFE0gs2E72TYkKF0d6iQtd9Fpte/view?usp=sharing" prefetch={false}>RESUME</Link>
       </div>
       <div className="absolute bottom-4 right-4 text-xl hidden md:block font-Gascogne">
         <Link href="/contact">CONTACT</Link>
