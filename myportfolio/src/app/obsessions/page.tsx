@@ -68,7 +68,7 @@ export default function Obsessions() {
       </div>
 
       {/* Main Content */}
-      <div ref={containerRef} className="relative flex flex-row min-h-screen px-16 pt-16">
+      <div ref={containerRef} className="relative flex flex-row min-h-screen px-16 pt-16 pb-24">
         <div className="z-10">
           <h1 ref={titleRef} className="text-[18vw] font-perandory leading-none mb-12">OBSESSIONS</h1>
           <div ref={textRef} className="flex flex-col space-y-4 text-xl font-Inter">
