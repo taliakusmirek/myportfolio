@@ -98,6 +98,7 @@ useEffect(() => {
         <section className="section flex flex-col justify-center items-start text-left px-16 min-w-screen">
           <h2 className="text-3xl font-bold font-Inter">CURRENT ROLES</h2>
           <p className="mt-4 text-xl font-Inter">
+            ai fellow @ <a href="https://www.breakthroughtech.org/">MIT</a><br />
             tech team @ <a href="https://bc.campuslabs.com/engage/organization/computer-science-society" target="_blank" className="font-bold no-underline">bccss</a><br />
             tech lead @ <a href="https://bcmig.onrender.com/" target="_blank" className="font-bold no-underline">mig</a><br />
             core team member @ <a href="https://www.innoforeveryone.org/" target="_blank" className="font-bold no-underline">innovation for everyone</a><br />
