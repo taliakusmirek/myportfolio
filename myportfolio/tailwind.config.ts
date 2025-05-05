@@ -10,7 +10,7 @@ export default {
     extend: {
       colors: {
         background: "var(--background)",
-        'brand-Bold-Red': "#F61010",
+        'brand-Bold-Red': "#6A77C7",
         'brand-Dark': "#000000",
         'brand-White' : "#FFFFFF"
       },
