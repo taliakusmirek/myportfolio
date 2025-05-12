@@ -62,7 +62,7 @@ export default function Home() {
       
       <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-center text-xs font-bold" ref={subtitleRef}>
         <p>BASED IN BOSTON, MA.</p>
-        <p>SOPHOMORE AT BOSTON COLLEGE, DOUBLE MAJORING IN CS AND BUSINESS.</p>
+        <p>JUNIOR AT BOSTON COLLEGE, DOUBLE MAJORING IN CS AND BUSINESS.</p>
       </div>
       
       <div className="absolute top-4 right-4 text-xl flex flex-col space-y-2 items-end hidden md:flex font-Gascogne">
