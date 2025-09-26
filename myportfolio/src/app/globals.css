@@ -2,42 +2,277 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Use Inter everywhere (loaded via Google Fonts in layout.tsx) */
+
+/* Book Styles */
+.book-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  overflow: hidden;
+  position: relative; /* for absolute children like cover-backdrop */
+}
+
+.book {
+  position: relative;
+  perspective: 1500px;
+  width: min(520px, 70vw); /* smaller single-page width */
+  height: calc(min(520px, 70vw) * 1.333); /* 3:4 page ratio */
+}
+
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: 0 50%;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+}
+
+.page.flipped {
+  transform: rotateY(-180deg);
+}
+
+.page-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 48px;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+}
+
+.page-content.no-padding { padding: 0; }
+
+.page-front {
+  transform: rotateY(0deg);
+}
+
+.page-back {
+  transform: rotateY(180deg);
+}
+
+/* Navigation */
+.book-nav {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  z-index: 10;
+}
+
+.nav-button {
+  padding: 10px 20px;
+  background: #4A45AA;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.3s, transform 0.06s ease-in-out;
+}
+
+.nav-button:hover { background: #3a3588; }
+.nav-button:active { transform: translateY(1px); }
+
+.nav-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Hard cover look (first/last page) */
+.page.hard {
+  background: #b33a35; /* deep red cover */
+  box-shadow: 0 14px 36px rgba(0,0,0,0.25);
+  border-radius: 10px;
+}
+.page.hard .page-content { padding: 0; }
+
+/* Fullscreen background video */
+.bg-video {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: #6aaaf2; /* fallback sky */
+}
+.bg-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Bottom controls (slider) */
+.controls-bottom {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  background: rgba(255,255,255,0.9);
+  border-radius: 999px;
+  padding: 10px 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.controls-bottom input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 360px;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  outline: none;
+}
+.controls-bottom input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #4A45AA;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+.controls-bottom input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #4A45AA;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+/* Bottom-left helper text */
+.help-left {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 20;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Bottom-right branding */
+.branding-right {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 20;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+/* Mobile Layout */
+@media (max-width: 1024px) {
+  .book-container {
+    padding: 20px;
+  }
+
+  .mobile-message {
+    text-align: center;
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #4A45AA;
+    font-size: 18px;
+    max-width: 500px;
+    margin: 40px auto;
+  }
+}
+
 :root {
   --background: #F61010;
 }
 
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/inter.ttf') format('truetype');
-  font-weight: normal;
+.poly-regular {
+  font-family: "Poly", serif;
+  font-weight: 400;
   font-style: normal;
 }
 
-@font-face {
-  font-family: 'Gascogne';
-  src: url('/fonts/gascogne.ttf') format('truetype');
-  font-weight: normal;
+.poly-regular-italic {
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.inter-heading {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
   font-style: normal;
 }
 
-@font-face {
-  font-family: 'Perandory';
-  src: url('/fonts/perandory.ttf') format('truetype');
-  font-weight: normal;
+.inter-body {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
   font-style: normal;
+}
+
+/* Display class uses Inter so everything is consistent */
+h1, h2, h3, .font-display {
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  letter-spacing: -0.2px;
 }
 
 body {
-  background: var(--background);
-  font-family: "Inter", sans-serif;
+  background: white;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   margin: 0;
 }
 
-h1 {
-  @apply font-Perandory;
-  font-weight: 0;
+html { scroll-behavior: smooth; }
+
+/* Timeline animations */
+@keyframes arcDraw {
+  to { stroke-dashoffset: 0; }
 }
 
-p {
-  @apply font-Inter;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -40%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+/* Stacked mobile layout */
+.mobile-book { display: none; width: 100%; max-width: 720px; margin: 0 auto; }
+.mobile-page { background: #fff; border-radius: 6px; box-shadow: 0 10px 28px rgba(0,0,0,0.1); padding: 28px; margin: 12px 0; }
+
+@media (max-width: 768px) {
+  .book { display: none; }
+  .mobile-book { display: block; }
+  .page-content { padding: 28px; }
+  .book-nav { position: static; transform: none; margin-top: 12px; justify-content: center; }
+  .controls-bottom { left: 50%; transform: translateX(-50%); bottom: 12px; padding: 8px 12px; }
+  .controls-bottom input[type="range"] { width: 220px; }
+  .help-left, .branding-right { display: none; }
+}
+
+/* Hero Gradient Background (soft pink ombre, full-width top) */
+.hero-gradient {
+  /* A subtle light-pink to transparent vertical ombre from the top */
+  background: linear-gradient(
+      to bottom,
+      rgba(255, 214, 234, 0.75) 0%,
+      rgba(255, 214, 234, 0.35) 20%,
+      rgba(255, 255, 255, 0) 55%
+    ),
+    #ffffff;
+}
+
+/* Subtle drop shadow for hover images over letters */
+.drop-shadow-hero {
+  filter: drop-shadow(0 18px 28px rgba(0,0,0,0.22)) drop-shadow(0 4px 10px rgba(0,0,0,0.08));
 }

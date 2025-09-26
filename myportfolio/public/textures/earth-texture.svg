@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="512" viewBox="0 0 1024 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="512" fill="#1E40AF"/>
+  <filter id="noise" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="5" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+    <feBlend mode="soft-light" in2="SourceGraphic"/>
+  </filter>
+  <rect width="1024" height="512" filter="url(#noise)" opacity="0.4"/>
+  <path d="M0 256 Q 256 150, 512 256 T 1024 256" stroke="#60A5FA" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M0 156 Q 256 50, 512 156 T 1024 156" stroke="#60A5FA" stroke-width="2" fill="none" opacity="0.3"/>
+  <path d="M0 356 Q 256 250, 512 356 T 1024 356" stroke="#60A5FA" stroke-width="2" fill="none" opacity="0.3"/>
+</svg>

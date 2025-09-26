@@ -10,14 +10,14 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
   {
     id: 1,
-    name: 'Advocato, A Full Stack Domestic Violence Assessment',
+    name: 'Advocato',
     image: '/images/advocato.png',
     languages: 'Django, TensorFlow, and FastAPI',
     repo: 'https://github.com/taliakusmirek/Advocato-SpainDomesticViolence-Chatbot',
   },
   {
     id: 2,
-    name: 'TechMargin, An E-Commerce API',
+    name: 'TechMargin',
     image: '/images/techmargin.png',
     languages: 'Python, Next.js',
     repo: 'https://github.com/taliakusmirek/TechMargin',
@@ -49,7 +49,7 @@ export default function Works() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-white text-black">
+    <div className="relative min-h-screen bg-transparent text-black">
       {/* Red Flash Overlay */}
       <div ref={overlayRef} className="fixed inset-0 bg-[#F61010] z-50"></div>
 

@@ -432,6 +432,15 @@ export default function UGCPage() {
             <div>
               <h4 className="font-Gascogne text-lg text-white mb-4">Connect</h4>
               <ul className="space-y-2 text-sm text-gray-300">
+                <li>
+                  <a href="https://github.com/taliakusmirek" className="hover:text-white transition-colors inline-flex items-center gap-2">
+                    {/* GitHub icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+                      <path d="M12 .5A11.5 11.5 0 0 0 .5 12 11.5 11.5 0 0 0 8 23.2c.4.1.6-.2.6-.4v-2c-2.5.5-3.1-1.1-3.1-1.1-.4-1-.9-1.3-.9-1.3-.8-.6.1-.6.1-.6.9.1 1.3 1 1.3 1 .8 1.3 2.1.9 2.6.7.1-.6.3-1 .6-1.2-2-.2-4.1-1-4.1-4.5 0-1 .4-1.9 1-2.5-.1-.3-.4-1.2.1-2.5 0 0 .8-.3 2.6 1a9 9 0 0 1 4.6 0c1.8-1.3 2.6-1 2.6-1 .5 1.3.2 2.2.1 2.5.6.6 1 1.5 1 2.5 0 3.5-2.1 4.2-4.1 4.5.3.2.6.8.6 1.6v2.3c0 .2.2.5.6.4A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/>
+                    </svg>
+                    GitHub
+                  </a>
+                </li>
                 <li><a href="https://twitter.com/taliadoux" className="hover:text-white transition-colors">Twitter</a></li>
                 <li><a href="https://linkedin.com/in/taliakusmirek" className="hover:text-white transition-colors">LinkedIn</a></li>
                 <li><a href="https://instagram.com/taliadoux" className="hover:text-white transition-colors">Instagram</a></li>
