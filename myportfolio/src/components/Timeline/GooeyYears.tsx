@@ -12,29 +12,29 @@ const DATA: YearBlock[] = [
   {
     title: "2025",
     items: [
-      "HackMIT ’25 — Built mcp^2, a Jarvis‑level AI calendar. Won 2nd place for Best AI‑augmented designer among 200+ teams.",
-      "Scaled an audience as a creator to 14K in 4 months with 4M+ views while testing narrative formats and partner collabs.",
-      "CIRA v2 shipped: skincare/makeup scanning and a Chrome extension based on real user feedback and research.",
+      "Simihaze Beauty — planned and optimized fall social campaigns across Instagram and TikTok, growing engagement and followers.",
+      "@taliadoux — scaled a personal fashion education brand to 20K+ followers and 9M+ views through daily short‑form content.",
+      "CIRA v2 — expanded a fashion‑tech MVP with skincare/makeup scanning and a Chrome extension informed by user research.",
     ],
   },
   {
     title: "2024",
     items: [
-      "AI for Good Scholar (Geneva): explored responsible gen‑AI for fashion and healthcare with global teams.",
-      "Ophelia beta: launched a Next.js + Supabase app and hit 300+ signups in 24 hours; stabilized auth and messaging.",
+      "Djerf Avenue — led a reputation and crisis‑communications audit with a 6–12 month roadmap for workplace and brand repair.",
+      "Rhode — analysed London launch pop‑up, OOH, and Sephora rollout to design a playbook for sustained UK conversion.",
     ],
   },
   {
     title: "2023",
     items: [
-      "Ran community experiments and refined short‑form storytelling across platforms.",
-      "Delivered early freelance design/web projects to learn velocity and shipping discipline.",
+      "Ran early community experiments in content, testing hooks, pacing, and storytelling formats across platforms.",
+      "Delivered freelance design and web projects, learning to ship fast while keeping a strategic lens on brand and product.",
     ],
   },
   {
     title: "2022",
     items: [
-      "Started product/design explorations and built a consistent shipping habit.",
+      "Started blending product thinking, data, and fashion — first experiments with technical projects and creative direction.",
     ],
   },
 ];

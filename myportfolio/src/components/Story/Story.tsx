@@ -7,32 +7,51 @@ export default function Story() {
   return (
     <section id="story" className="relative z-10 bg-transparent">
       <div className="mx-auto max-w-7xl px-6 py-16 md:py-24">
-        <div className="relative rounded-3xl bg-white/90 ring-1 ring-black/10 p-10 md:p-16 backdrop-blur-sm overflow-hidden min-h-[780px] md:min-h-[920px] grid place-items-center">
-          {/* Centered headline */}
-          <div className="relative z-10 text-center">
-            <h3 className="font-display text-4xl md:text-5xl lg:text-6xl text-black/90">Always building</h3>
-            <p className="poly-regular-italic mt-2 text-slate-500 text-lg">(sometimes serious, sometimes just vibes)</p>
+        <div className="relative rounded-3xl bg-white/90 ring-1 ring-black/10 p-10 md:p-16 backdrop-blur-sm overflow-hidden grid place-items-center">
+          {/* Headline + subcopy */}
+          <div className="relative z-10 max-w-xl text-center">
+            <h3 className="font-display text-4xl md:text-5xl lg:text-6xl text-black/90">Always styling</h3>
+            <p className="poly-regular-italic mt-3 text-slate-500 text-lg">
+              Building brands, stories, and looks that actually feel wearable.
+            </p>
           </div>
 
-          {/* Rotating elements around the center */}
-          <div className="absolute inset-0 grid place-items-center">
-            {/* Subtle radial glow */}
+          {/* Scattered images around the text instead of a perfect circle */}
+          <div className="relative mt-10 min-h-[520px] md:min-h-[620px] w-full">
             <div
-              className="pointer-events-none absolute h-[560px] w-[560px] rounded-full"
+              className="pointer-events-none absolute inset-0"
               aria-hidden
               style={{
                 background:
-                  "radial-gradient(280px 180px at 50% 50%, rgba(255,214,234,0.45), rgba(255,214,234,0.18) 40%, rgba(255,214,234,0) 70%)",
-                filter: "blur(14px)",
+                  "radial-gradient(260px 180px at 20% 20%, rgba(255,214,234,0.35), rgba(255,214,234,0))",
               }}
             />
-            <CirclingElements radius={320} duration={14} easing="linear" pauseOnHover counterRotateChildren>
-              {alwaysAssets.map((src,i)=> (
-                <div key={i} className="relative h-20 w-20 md:h-24 md:w-24 rounded-2xl overflow-hidden ring-1 ring-black/10 shadow">
-                  <SmartImage src={src} alt="placeholder" className="object-cover absolute inset-0 h-full w-full" />
-                </div>
-              ))}
-            </CirclingElements>
+
+            <div className="absolute inset-0">
+              {alwaysAssets.map((src, i) => {
+                const positions = [
+                  "top-4 left-6",
+                  "top-16 right-10",
+                  "top-40 left-1/2 -translate-x-1/2",
+                  "bottom-16 left-8",
+                  "bottom-10 right-6",
+                  "top-1/2 right-1/4",
+                ];
+                const pos = positions[i % positions.length];
+                return (
+                  <div key={i} className={`absolute ${pos}`}>
+                    <div className="mx-auto mb-2 h-3 w-3 rounded-full bg-[#f973b8] shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
+                    <div className="h-24 w-24 md:h-40 md:w-40 rounded-2xl overflow-hidden ring-1 ring-black/10 shadow-md bg-white">
+                      <SmartImage
+                        src={src}
+                        alt="style moment"
+                        className="object-cover absolute inset-0 h-full w-full"
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

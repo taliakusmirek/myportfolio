@@ -39,15 +39,33 @@ export default function ProjectCard({ project }: Props) {
           </span>
         </div>
 
-        {/* Media (prefer card-specific assets on landing) */}
-        {project.singleCoverOnly && project.cover ? (
+        {/* Media (prefer a single large cover when available) */}
+        {project.cardCover ? (
           <div className="mt-5">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-black/10">
+            <div className="relative aspect-[16/5] overflow-hidden rounded-2xl ring-1 ring-black/10">
+              <Image
+                src={project.cardCover}
+                alt={`${project.title} card cover`}
+                fill
+                className={`object-cover ${
+                  project.slug === "simihaze-beauty-fall-campaign"
+                    ? "scale-[1.02] object-[60%_30%]"
+                    : project.slug === "djerf-avenue-reputation-audit"
+                    ? "scale-[1.02] object-top"
+                    : "object-top"
+                }`}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+          </div>
+        ) : project.singleCoverOnly && project.cover ? (
+          <div className="mt-5">
+            <div className="relative aspect-[5/3] overflow-hidden rounded-2xl ring-1 ring-black/10">
               <Image
                 src={project.cover}
                 alt={`${project.title} cover`}
                 fill
-                className="object-cover"
+                className="object-cover scale-[1.02]"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
@@ -65,27 +83,6 @@ export default function ProjectCard({ project }: Props) {
                 />
               </div>
             ))}
-          </div>
-        ) : project.cardCover ? (
-          <div className="mt-5 grid grid-cols-2 gap-4">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-black/10">
-              <Image
-                src={project.cardCover}
-                alt={`${project.title} card cover`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-black/10">
-              <Image
-                src={project.cardCover}
-                alt={`${project.title} alt`}
-                fill
-                className="object-cover scale-[1.06] rotate-[-2deg]"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
           </div>
         ) : project.gallery && project.gallery.length >= 2 ? (
           <div className="mt-5 grid grid-cols-2 gap-4">

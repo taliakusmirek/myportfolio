@@ -37,18 +37,6 @@ export default function CaseStudyArticle({ project }: { project: Project }) {
         <h2 className="mt-8 text-xl md:text-2xl font-semibold text-black">Solution</h2>
         <p>{project.caseStudy.solution}</p>
 
-        <h2 className="mt-8 text-xl md:text-2xl font-semibold text-black">Design Process</h2>
-        <p>
-          I led the end-to-end design using Figma for wireframes, flows, components, and high-fidelity UI.
-          My process included discovery interviews, journey mapping, low-to-high fidelity iterations, and usability testing.
-        </p>
-        <ul>
-          <li>Research: interviews, surveys, and competitive analysis</li>
-          <li>Ideation: task flows, IA, and rapid wireframes</li>
-          <li>Design: Figma components, variants, and design tokens</li>
-          <li>Validation: prototype tests and iteration cycles</li>
-        </ul>
-
         <h2 className="mt-8 text-xl md:text-2xl font-semibold text-black">Results</h2>
         <p>{project.caseStudy.results}</p>
 

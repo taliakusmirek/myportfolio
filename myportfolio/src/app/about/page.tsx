@@ -85,24 +85,68 @@ useEffect(() => {
           <h1 className="text-[18vw] font-Perandory">ABOUT</h1>
         </section>
 
-        <section className="section flex flex-col justify-center items-start text-left px-16 min-w-screen">
-          <h2 className="text-3xl font-bold font-Inter">PAST ROLES</h2>
-          <p className="mt-4 text-xl font-Inter">
-            software engineer intern @ <a href="https://opheliadating.com/" target="_blank" className="font-bold no-underline">ophelia</a><br />
-            first american scholar @ <a href="https://www.linkedin.com/posts/talia-kusmirek-b0421b289_aiforgood-un-aiforgood-activity-7188588038422167554-R5gy/" target="_blank" className="font-bold no-underline">ai for good @ united nations</a><br />
-            research student @ <a href="https://cybersecurity.sites.ccsu.edu/" target="_blank" className="font-bold no-underline">ccsu</a><br />
-            front-end software engineer intern @ <a href="https://www.techforgoodinc.org/" target="_blank" className="font-bold no-underline">tech for good inc.</a>
-          </p>
+        <section className="section flex flex-col lg:flex-row justify-center items-start gap-10 px-16 min-w-screen">
+          <div className="max-w-xl">
+            <h2 className="text-3xl font-bold font-Inter mb-4">The Full Story</h2>
+            <h3 className="text-2xl font-semibold font-Inter mb-4">How It Started</h3>
+            <p className="mt-2 text-lg font-Inter leading-relaxed">
+              I spent the past few years developing a strong foundation in data, product thinking, and AI, while simultaneously growing my
+              presence in the fashion and creator space. I’ve worked with brands like Simihaze Beauty as a digital strategist, built an
+              Instagram community of over 20,000 women, and produced content that has reached 9M+ views in just five months.
+            </p>
+          </div>
+
+          {/* Stacked photos */}
+          <div className="relative hidden lg:block min-w-[320px] h-[360px]">
+            {/* Top-left photo + pin */}
+            <div className="absolute -top-4 left-0">
+              <div className="mx-auto mb-2 h-4 w-4 rounded-full bg-[#f973b8] shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
+              <div className="h-56 w-40 rounded-3xl overflow-hidden ring-1 ring-black/10 shadow-md bg-white">
+                <img src="/images/top.jpeg" alt="Talia portrait" className="h-full w-full object-cover" />
+              </div>
+            </div>
+
+            {/* Top-right photo + pin */}
+            <div className="absolute top-16 -right-6 rotate-[-6deg]">
+              <div className="mx-auto mb-2 h-4 w-4 rounded-full bg-[#f973b8] shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
+              <div className="h-60 w-44 rounded-3xl overflow-hidden ring-1 ring-black/10 shadow-md bg-white">
+                <img src="/images/landing.jpg" alt="Fashion detail" className="h-full w-full object-cover" />
+              </div>
+            </div>
+
+            {/* Bottom-left photo + pin */}
+            <div className="absolute bottom-0 left-10 rotate-[4deg]">
+              <div className="mx-auto mb-2 h-4 w-4 rounded-full bg-[#f973b8] shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
+              <div className="h-52 w-40 rounded-3xl overflow-hidden ring-1 ring-black/10 shadow-md bg-white">
+                <img src="/images/creator.png" alt="Instagram work" className="h-full w-full object-cover" />
+              </div>
+            </div>
+          </div>
         </section>
 
-        <section className="section flex flex-col justify-center items-start text-left px-16 min-w-screen">
-          <h2 className="text-3xl font-bold font-Inter">CURRENT ROLES</h2>
-          <p className="mt-4 text-xl font-Inter">
-            ai fellow @ <a href="https://www.breakthroughtech.org/" target="_blank" className="font-bold no-underline">MIT</a><br />
-            tech team @ <a href="https://bc.campuslabs.com/engage/organization/computer-science-society" target="_blank" className="font-bold no-underline">bccss</a><br />
-            tech lead @ <a href="https://bcmig.onrender.com/" target="_blank" className="font-bold no-underline">mig</a><br />
-            core team member @ <a href="https://www.innoforeveryone.org/" target="_blank" className="font-bold no-underline">innovation for everyone</a><br />
-            mentor @ <a href="https://aiforgood.itu.int/innovate-for-impact/" target="_blank" className="font-bold no-underline">ai for good</a>
+        <section className="section flex flex-col justify-center items-start text-left px-16 min-w-screen max-w-3xl">
+          <h2 className="text-3xl font-bold font-Inter mb-4">My Mission</h2>
+          <p className="mt-2 text-lg font-Inter leading-relaxed">
+            Today, I focus on creative direction, social media strategy, and digital marketing for fashion and beauty brands, applying my
+            technical background to make campaigns smarter, more measurable, and more scalable. I’m especially passionate about:
+          </p>
+          <ul className="mt-4 text-lg font-Inter leading-relaxed list-disc list-inside space-y-2">
+            <li>Fashion brand storytelling</li>
+            <li>Influencer &amp; creator strategy</li>
+            <li>Content systems that scale</li>
+            <li>Brand launch strategy</li>
+            <li>Data-driven marketing (UTMs, funnels, measurement)</li>
+            <li>Using tech + AI to optimize marketing workflows</li>
+          </ul>
+        </section>
+
+        <section className="section flex flex-col justify-center items-start text-left px-16 min-w-screen max-w-3xl">
+          <p className="mt-2 text-lg font-Inter leading-relaxed">
+            Across my work — from Q&amp;A web experiences to brand audits, launch strategies, and content direction — I bridge creativity with
+            analytical thinking.
+          </p>
+          <p className="mt-4 text-lg font-Inter leading-relaxed">
+            I approach every project like both a strategist and a builder: thoughtful, iterative, and grounded in results.
           </p>
         </section>
       </div>
