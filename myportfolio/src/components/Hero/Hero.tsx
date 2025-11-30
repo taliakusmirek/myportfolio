@@ -1,8 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
-import SmartImage from "../shared/SmartImage";
-import { alwaysAssets } from "../shared/alwaysAssets";
+import React from "react";
 
 type HoverAsset = {
   src: string;

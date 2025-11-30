@@ -1,6 +1,5 @@
 import React from "react";
 import SmartImage from "../shared/SmartImage";
-import CirclingElements from "./CirclingElements";
 import { alwaysAssets } from "../shared/alwaysAssets";
 
 export default function Story() {

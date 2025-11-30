@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useLayoutEffect, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -102,7 +103,7 @@ useEffect(() => {
             <div className="absolute -top-4 left-0">
               <div className="mx-auto mb-2 h-4 w-4 rounded-full bg-[#f973b8] shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
               <div className="h-56 w-40 rounded-3xl overflow-hidden ring-1 ring-black/10 shadow-md bg-white">
-                <img src="/images/top.jpeg" alt="Talia portrait" className="h-full w-full object-cover" />
+                <Image src="/images/top.jpeg" alt="Talia portrait" fill className="object-cover" />
               </div>
             </div>
 
@@ -110,7 +111,7 @@ useEffect(() => {
             <div className="absolute top-16 -right-6 rotate-[-6deg]">
               <div className="mx-auto mb-2 h-4 w-4 rounded-full bg-[#f973b8] shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
               <div className="h-60 w-44 rounded-3xl overflow-hidden ring-1 ring-black/10 shadow-md bg-white">
-                <img src="/images/landing.jpg" alt="Fashion detail" className="h-full w-full object-cover" />
+                <Image src="/images/landing.jpg" alt="Fashion detail" fill className="object-cover" />
               </div>
             </div>
 
@@ -118,7 +119,7 @@ useEffect(() => {
             <div className="absolute bottom-0 left-10 rotate-[4deg]">
               <div className="mx-auto mb-2 h-4 w-4 rounded-full bg-[#f973b8] shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
               <div className="h-52 w-40 rounded-3xl overflow-hidden ring-1 ring-black/10 shadow-md bg-white">
-                <img src="/images/creator.png" alt="Instagram work" className="h-full w-full object-cover" />
+                <Image src="/images/creator.png" alt="Instagram work" fill className="object-cover" />
               </div>
             </div>
           </div>
