@@ -68,7 +68,7 @@ export default function Obsessions() {
       </div>
 
       {/* Main Content */}
-      <div ref={containerRef} className="relative flex flex-row min-h-screen px-16 pt-16">
+      <div ref={containerRef} className="relative flex flex-row min-h-screen px-16 pt-16 pb-24">
         <div className="z-10">
           <h1 ref={titleRef} className="text-[18vw] font-perandory leading-none mb-12">OBSESSIONS</h1>
           <div ref={textRef} className="flex flex-col space-y-4 text-xl font-Inter">
@@ -97,7 +97,7 @@ export default function Obsessions() {
         <Link href="/">HOME</Link>
       </div>
       <div className="absolute bottom-4 left-4 text-xl hidden md:block font-Gascogne">
-        <Link href="/resume">RESUME</Link>
+        <Link href="https://drive.google.com/file/d/1ZlXPqvFE0gs2E72TYkKF0d6iQtd9Fpte/view?usp=sharing" prefetch={false}>RESUME</Link>
       </div>
       <div className="absolute bottom-4 right-4 text-xl hidden md:block font-Gascogne">
         <Link href="/contact">CONTACT</Link>
