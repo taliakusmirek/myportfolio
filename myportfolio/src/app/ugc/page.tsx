@@ -1,18 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import Head from 'next/head';
 
 export default function UGCPage() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <>
       <Head>
@@ -456,7 +447,7 @@ export default function UGCPage() {
       `}</style>
 
       <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
       {/* HERO */}
@@ -524,7 +515,7 @@ export default function UGCPage() {
         <div className="wd-layout">
           <div className="wd-left">
             <div className="eyebrow">What I Do</div>
-            <h2 className="sec-title">I overthink everything<br/>so your audience<br/><em>doesn't have to.</em></h2>
+            <h2 className="sec-title">I overthink everything<br/>so your audience<br/><em>doesn&apos;t have to.</em></h2>
             <p className="lead">I turn AI, careers, and startup ideas into content people actually watch — content that feels native, communicates fast, and actually performs.</p>
             <div className="pill-row">
               <span className="pill">Feels native (not like an ad)</span>
@@ -570,7 +561,7 @@ export default function UGCPage() {
             <p className="pc-desc">Breaking down AI tools, trends, and concepts in a way Gen Z actually understands and shares.</p>
             <div className="pc-topics">
               <span className="pc-t">AI tools & use cases</span>
-              <span className="pc-t">"What this actually means" content</span>
+              <span className="pc-t">&quot;What this actually means&quot; content</span>
               <span className="pc-t">Simplifying technical ideas</span>
             </div>
           </div>
@@ -591,7 +582,7 @@ export default function UGCPage() {
             <div className="pc-name">Overthinking, Decoded</div>
             <p className="pc-desc">Relatable, viral-style content that puts words to what your audience is already thinking.</p>
             <div className="pc-topics">
-              <span className="pc-t">"Why this works" content</span>
+              <span className="pc-t">&quot;Why this works&quot; content</span>
               <span className="pc-t">Social + career observations</span>
               <span className="pc-t">High-performing, shareable ideas</span>
             </div>
@@ -649,7 +640,7 @@ export default function UGCPage() {
         <div className="wf-intro">
           <div className="eyebrow">Process</div>
           <h2 className="sec-title">Simple, Fast,<br/><em>Collaborative.</em></h2>
-          <p>From first call to final delivery — here's exactly how we work together.</p>
+          <p>From first call to final delivery &mdash; here&apos;s exactly how we work together.</p>
         </div>
         <div className="wf-row">
           <div className="ws">
@@ -670,7 +661,7 @@ export default function UGCPage() {
           <div className="ws">
             <div className="ws-n">04</div>
             <div className="ws-title">Edits</div>
-            <div className="ws-desc">Text, subtitles, CTAs — refined until it's right</div>
+            <div className="ws-desc">Text, subtitles, CTAs &mdash; refined until it&apos;s right</div>
           </div>
           <div className="ws">
             <div className="ws-n">05</div>
@@ -686,13 +677,13 @@ export default function UGCPage() {
         <h2 className="sec-title">What Brands <em>Say</em></h2>
         <div className="tg">
           <div className="tc">
-            <span className="qm">"</span>
-            <p className="tt">Always fast turnaround and quick to reply, making the process so fast to deliver final versions. Talia's efficiency and communication made our collaboration seamless.</p>
+            <span className="qm">&quot;</span>
+            <p className="tt">Always fast turnaround and quick to reply, making the process so fast to deliver final versions. Talia&apos;s efficiency and communication made our collaboration seamless.</p>
             <div className="ta">Medici.ac</div>
             <div className="tco">Brand Partner</div>
           </div>
           <div className="tc">
-            <span className="qm">"</span>
+            <span className="qm">&quot;</span>
             <p className="tt">Very organized, made sure a contract was in place so both parties were transparent and accountable. Professional approach that made us feel confident throughout the entire process.</p>
             <div className="ta">Plaud</div>
             <div className="tco">Brand Partner</div>
@@ -703,8 +694,8 @@ export default function UGCPage() {
       {/* CONTACT */}
       <section id="contact">
         <div className="eyebrow">Get In Touch</div>
-        <h2 className="sec-title">Let's Make Content<br/>People Actually <em>Watch.</em></h2>
-        <p className="csub">If you're building something and want Gen Z to understand it — I can help.</p>
+        <h2 className="sec-title">Let&apos;s Make Content<br/>People Actually <em>Watch.</em></h2>
+        <p className="csub">If you&apos;re building something and want Gen Z to understand it &mdash; I can help.</p>
         <a href="mailto:kusmire@bc.edu" className="cemail">✉ kusmire@bc.edu</a>
         <div className="cbtns">
           <a href="mailto:kusmire@bc.edu" className="btn-p">Book a Call →</a>
