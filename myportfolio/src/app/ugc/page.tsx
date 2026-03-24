@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Head from 'next/head';
 
 export default function UGCPage() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
@@ -14,469 +14,734 @@ export default function UGCPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#f5f4f2] font-Inter">
-      {/* Navigation Bar */}
-      <nav className={`bg-white border-b border-gray-200 py-4 transition-all duration-1000 ease-out ${
-        isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-      }`}>
-        <div className="max-w-6xl mx-auto px-8">
-          <div className="flex justify-center space-x-8 text-sm font-medium">
-            <Link href="/" className="text-black hover:text-gray-600 transition-colors">HOME</Link>
-            <Link href="/guides" className="text-black hover:text-gray-600 transition-colors">GUIDES</Link>
-            <Link href="/ugc" className="text-black hover:text-gray-600 transition-colors">UGC</Link>
-            <Link href="/about" className="text-black hover:text-gray-600 transition-colors">ABOUT</Link>
-            <Link href="/contact" className="text-black hover:text-gray-600 transition-colors">CONTACT</Link>
+    <>
+      <Head>
+        <title>taliadoux</title>
+        <link rel="icon" href="/icons/instagram.svg" type="image/svg+xml" />
+      </Head>
+      <style jsx global>{`
+        :root {
+          --pink-bg: #FFF0F3;
+          --pink-mid: #FFD6E0;
+          --pink-deep: #F5A8BF;
+          --pink-accent: #E8759A;
+          --pink-hot: #D94F7A;
+          --black: #0D0D0D;
+          --charcoal: #1C1C1C;
+          --white: #FFFFFF;
+          --off-white: #FFFBFC;
+          --muted: #9A8890;
+          --divider: #F0DDE4;
+          --green: #7EB88A;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+          font-family: 'DM Sans', sans-serif;
+          background: var(--off-white);
+          color: var(--black);
+          overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+          position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+          padding: 20px 56px;
+          display: flex; align-items: center; justify-content: space-between;
+          background: rgba(255,251,252,0.92);
+          backdrop-filter: blur(14px);
+          border-bottom: 1px solid var(--divider);
+        }
+        .nav-logo {
+          font-family: 'Inter', sans-serif;
+          font-weight: 700; font-size: 22px;
+          color: var(--black); text-decoration: none;
+        }
+        .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+        .nav-links a {
+          text-decoration: none; font-size: 12px; font-weight: 500;
+          letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted);
+          transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--black); }
+        .nav-cta {
+          background: var(--black); color: var(--white);
+          padding: 10px 22px; border-radius: 100px;
+          text-decoration: none; font-size: 12px; font-weight: 500;
+          letter-spacing: 0.06em; text-transform: uppercase;
+          transition: all 0.2s;
+        }
+        .nav-cta:hover { background: var(--pink-hot); transform: translateY(-1px); }
+
+        /* HERO */
+        .hero {
+          min-height: 100vh;
+          background: linear-gradient(160deg, #FFE4EE 0%, #FFF0F5 40%, #FFD6E2 80%, #FFEAF1 100%);
+          position: relative; overflow: hidden;
+          display: flex; flex-direction: column;
+          padding-top: 72px;
+        }
+        .blob1 {
+          position: absolute; width: 700px; height: 700px; border-radius: 50%;
+          background: radial-gradient(circle, rgba(217,79,122,0.15) 0%, transparent 65%);
+          top: -200px; right: -150px; pointer-events: none;
+        }
+        .blob2 {
+          position: absolute; width: 480px; height: 480px; border-radius: 50%;
+          background: radial-gradient(circle, rgba(245,168,191,0.2) 0%, transparent 65%);
+          bottom: -60px; left: 80px; pointer-events: none;
+        }
+
+        /* Big "Hey, there" above image */
+        .hero-title-row {
+          position: relative; z-index: 10;
+          display: flex; align-items: center; justify-content: center;
+          padding: 20px 56px 10px;
+          gap: 0;
+        }
+        .hero-hey, .hero-there {
+          font-family: 'Playfair Display', serif;
+          font-style: italic; font-weight: 400;
+          font-size: clamp(76px, 11vw, 156px);
+          color: var(--black); line-height: 0.88;
+          letter-spacing: -5px;
+          animation: fadeUp 0.7s ease both;
+        }
+        .hero-there { animation-delay: 0.07s; }
+        .hero-comma { color: var(--pink-hot); }
+
+        /* Photo block below "Hey, there" */
+        .hero-mid {
+          position: relative; z-index: 5;
+          display: flex; justify-content: center;
+          margin-top: 0px;
+        }
+
+        .hero-status-pill {
+          position: absolute;
+          left: calc(50% - clamp(120px,13vw,200px) - 220px);
+          bottom: 60px; z-index: 20;
+          background: var(--white);
+          border: 1.5px solid var(--divider);
+          border-radius: 100px;
+          padding: 9px 18px;
+          display: flex; align-items: center; gap: 8px;
+          font-size: 12px; font-weight: 500;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+          white-space: nowrap;
+          animation: fadeUp 0.7s 0.3s ease both;
+        }
+        .sdot {
+          width: 8px; height: 8px; border-radius: 50%;
+          background: var(--green);
+          animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+          0%,100% { box-shadow: 0 0 0 0 rgba(126,184,138,0.5); }
+          50% { box-shadow: 0 0 0 7px rgba(126,184,138,0); }
+        }
+
+        .hero-photo {
+          width: clamp(240px, 26vw, 400px);
+          aspect-ratio: 3/4;
+          border-radius: 240px 240px 0 0;
+          overflow: hidden;
+          background: linear-gradient(170deg, #F7C0D0 0%, #E8759A 60%, #C43468 100%);
+          flex-shrink: 0; z-index: 6;
+          animation: fadeUp 0.9s 0.04s ease both;
+          box-shadow: 0 28px 72px rgba(217,79,122,0.22);
+        }
+        .hero-photo img {
+          width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+        .hero-photo-inner {
+          width: 100%; height: 100%;
+          display: flex; flex-direction: column;
+          align-items: center; justify-content: center;
+          color: rgba(255,255,255,0.75);
+          text-align: center; gap: 10px;
+          padding: 20px;
+        }
+        .hero-photo-inner span { font-size: 48px; }
+        .hero-photo-inner strong { font-size: 15px; color: var(--white); display: block; }
+        .hero-photo-inner p { font-size: 11px; opacity: 0.65; line-height: 1.5; max-width: 130px; }
+
+        .hero-spec-text {
+          position: absolute;
+          right: calc(50% - clamp(120px,13vw,200px) - 210px);
+          bottom: 90px; z-index: 20;
+          font-size: 13px; line-height: 1.8; color: var(--charcoal);
+          max-width: 190px;
+          animation: fadeUp 0.7s 0.25s ease both;
+        }
+
+        /* Big name + role at bottom — modern font */
+        .hero-bottom {
+          position: relative; z-index: 10;
+          display: flex; align-items: flex-end; justify-content: space-between;
+          padding: 0 56px 44px;
+          margin-top: -16px;
+        }
+        .hero-name {
+          font-family: 'Inter', sans-serif;
+          font-weight: 900; font-style: normal;
+          font-size: clamp(52px, 7.5vw, 112px);
+          line-height: 0.88; letter-spacing: -3px;
+          color: var(--black); text-transform: uppercase;
+          animation: fadeUp 0.8s 0.1s ease both;
+        }
+        .hero-role {
+          font-family: 'Inter', sans-serif;
+          font-weight: 700; font-style: normal;
+          font-size: clamp(26px, 3.4vw, 50px);
+          line-height: 1.08; letter-spacing: -1.5px;
+          text-transform: uppercase; text-align: right;
+          color: var(--black);
+          animation: fadeUp 0.8s 0.15s ease both;
+        }
+        .hero-role em { font-style: italic; color: var(--pink-hot); font-weight: 400; }
+
+        /* Stats strip */
+        .hero-stats {
+          display: flex; border-top: 1px solid var(--divider);
+          background: var(--white); position: relative; z-index: 10;
+        }
+        .stat-box {
+          flex: 1; padding: 26px 40px;
+          border-right: 1px solid var(--divider);
+          animation: fadeUp 0.8s 0.22s ease both;
+        }
+        .stat-box:last-child { border-right: none; }
+        .stat-n {
+          font-family: 'Inter', sans-serif;
+          font-size: 36px; font-weight: 700; line-height: 1;
+          color: var(--black); margin-bottom: 5px;
+        }
+        .stat-l {
+          font-size: 11px; font-weight: 500;
+          letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+        }
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(28px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SECTION BASE */
+        section { padding: 96px 56px; }
+        .eyebrow {
+          font-size: 11px; font-weight: 600;
+          letter-spacing: 0.16em; text-transform: uppercase;
+          color: var(--pink-hot); margin-bottom: 16px;
+          display: flex; align-items: center; gap: 12px;
+        }
+        .eyebrow::after { content:''; flex:1; max-width:48px; height:1.5px; background:var(--pink-deep); }
+        .sec-title {
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(34px,4vw,56px);
+          font-weight: 900; letter-spacing: -2px; line-height: 1.02; margin-bottom: 18px;
+        }
+        .sec-title em { font-style: italic; font-weight: 400; color: var(--pink-hot); }
+
+        /* WHAT I DO */
+        #whatido { background: var(--pink-bg); }
+        .wd-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .wd-left .lead { font-size: 17px; line-height: 1.8; color: #3A2F34; margin-bottom: 28px; }
+        .pill-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+        .pill {
+          padding: 7px 16px; border-radius: 100px;
+          background: var(--white); border: 1.5px solid var(--pink-mid);
+          font-size: 13px; font-weight: 500; color: var(--charcoal);
+        }
+        .btn-p {
+          display: inline-flex; align-items: center; gap: 8px;
+          background: var(--pink-hot); color: var(--white);
+          padding: 13px 26px; border-radius: 100px;
+          text-decoration: none; font-size: 13px; font-weight: 500;
+          letter-spacing: 0.05em; text-transform: uppercase;
+          transition: all 0.25s;
+        }
+        .btn-p:hover { background: #C23668; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(217,79,122,0.3); }
+        .btn-g {
+          display: inline-flex; align-items: center; gap: 8px;
+          border: 1.5px solid var(--black); color: var(--black);
+          padding: 12px 24px; border-radius: 100px;
+          text-decoration: none; font-size: 13px; font-weight: 500;
+          letter-spacing: 0.05em; text-transform: uppercase;
+          transition: all 0.25s; margin-left: 10px;
+        }
+        .btn-g:hover { background: var(--black); color: var(--white); }
+        .wd-right { display: flex; flex-direction: column; gap: 18px; }
+        .mc {
+          background: var(--white); border: 1px solid var(--divider);
+          border-radius: 20px; padding: 26px 28px;
+          box-shadow: 0 4px 20px rgba(217,79,122,0.05);
+          transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .mc:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(217,79,122,0.1); }
+        .mc-icon { font-size: 24px; margin-bottom: 10px; }
+        .mc-title { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+        .mc-desc { font-size: 13px; line-height: 1.65; color: var(--muted); }
+
+        /* PILLARS */
+        #pillars { background: var(--white); }
+        .pillars-intro { max-width: 540px; margin-bottom: 56px; }
+        .pillars-intro p { font-size: 16px; line-height: 1.7; color: #5A4A50; margin-top: 12px; }
+        .pg { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+        .pc {
+          border-radius: 24px; padding: 40px 32px;
+          border: 1px solid var(--divider); background: var(--off-white);
+          position: relative; overflow: hidden;
+          transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .pc:hover { transform: translateY(-6px); box-shadow: 0 18px 50px rgba(217,79,122,0.1); }
+        .pc::after {
+          content:''; position: absolute; top:0; left:0; right:0; height:3px;
+          background: linear-gradient(90deg, var(--pink-hot), var(--pink-deep));
+          opacity: 0; transition: opacity 0.3s;
+        }
+        .pc:hover::after { opacity: 1; }
+        .pc-num {
+          font-family: 'Inter', sans-serif; font-size: 72px; font-weight: 900;
+          color: var(--pink-mid); position: absolute; top: 14px; right: 22px;
+          line-height: 1; pointer-events: none;
+        }
+        .pc-type { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pink-hot); margin-bottom: 10px; }
+        .pc-name { font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 10px; line-height: 1.2; }
+        .pc-desc { font-size: 13px; line-height: 1.65; color: var(--muted); margin-bottom: 18px; }
+        .pc-topics { display: flex; flex-direction: column; gap: 7px; }
+        .pc-t { font-size: 13px; color: #3A2F34; display: flex; align-items: center; gap: 8px; }
+        .pc-t::before { content:'—'; color: var(--pink-hot); font-weight: 700; }
+
+        /* SERVICES */
+        #services { background: var(--pink-bg); }
+        .sg { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 52px; }
+        .sc {
+          background: var(--white); border-radius: 24px; padding: 34px 30px;
+          border: 1px solid var(--divider);
+          transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden;
+        }
+        .sc:hover { transform: translateY(-6px); box-shadow: 0 16px 44px rgba(217,79,122,0.1); }
+        .sbadge {
+          display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+          text-transform: uppercase; color: var(--pink-hot);
+          background: rgba(217,79,122,0.08); border: 1px solid rgba(217,79,122,0.2);
+          padding: 4px 12px; border-radius: 100px; margin-bottom: 16px;
+        }
+        .st { font-family: 'Inter', sans-serif; font-size: 21px; font-weight: 700; margin-bottom: 9px; }
+        .sd { font-size: 13px; line-height: 1.65; color: var(--muted); margin-bottom: 18px; }
+        .slist { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .slist li { font-size: 13px; color: #3A2F34; display: flex; align-items: center; gap: 8px; }
+        .slist li::before { content:'✦'; color: var(--pink-hot); font-size: 9px; }
+        .sta { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--divider); font-size: 12px; font-weight: 600; color: var(--pink-hot); }
+        .sc.feat { background: var(--black); border-color: var(--black); }
+        .sc.feat .st, .sc.feat .slist li { color: var(--white); }
+        .sc.feat .sd { color: rgba(255,255,255,0.5); }
+        .sc.feat .sta { color: var(--pink-deep); border-color: rgba(255,255,255,0.1); }
+        .sc.feat .sbadge { background: rgba(245,168,191,0.15); color: var(--pink-deep); border-color: rgba(245,168,191,0.3); }
+        .mpop {
+          position: absolute; top: 18px; right: 18px;
+          background: var(--pink-hot); color: var(--white);
+          font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+          padding: 4px 12px; border-radius: 100px;
+        }
+
+        /* WORKFLOW */
+        #workflow { background: var(--black); color: var(--white); }
+        #workflow .eyebrow { color: var(--pink-deep); }
+        #workflow .eyebrow::after { background: var(--pink-deep); opacity: 0.35; }
+        #workflow .sec-title { color: var(--white); }
+        .wf-intro { max-width: 500px; margin-bottom: 56px; }
+        .wf-intro p { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.45); margin-top: 12px; }
+        .wf-row {
+          display: grid; grid-template-columns: repeat(5,1fr);
+          background: rgba(255,255,255,0.05); border-radius: 24px; overflow: hidden; gap: 1px;
+        }
+        .ws {
+          padding: 34px 26px; background: rgba(255,255,255,0.02);
+          border-right: 1px solid rgba(255,255,255,0.06);
+          transition: background 0.3s;
+        }
+        .ws:last-child { border-right: none; }
+        .ws:hover { background: rgba(217,79,122,0.09); }
+        .ws-n {
+          font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
+          color: var(--pink-hot); letter-spacing: 0.12em; text-transform: uppercase;
+          margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+        }
+        .ws-n::after { content:''; flex:1; height:1px; background: rgba(217,79,122,0.3); }
+        .ws-title { font-weight: 600; font-size: 14px; margin-bottom: 7px; color: var(--white); }
+        .ws-desc { font-size: 12px; line-height: 1.6; color: rgba(255,255,255,0.38); }
+
+        /* TESTIMONIALS */
+        #testimonials { background: var(--off-white); }
+        .tg { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 52px; }
+        .tc {
+          background: var(--pink-bg); border: 1px solid var(--pink-mid);
+          border-radius: 24px; padding: 38px;
+          transition: transform 0.3s;
+        }
+        .tc:hover { transform: translateY(-4px); }
+        .qm {
+          font-family: 'Inter', sans-serif; font-size: 80px; font-weight: 900;
+          color: var(--pink-mid); line-height: 0.7; margin-bottom: 16px; display: block;
+        }
+        .tt { font-size: 15px; line-height: 1.8; color: #3A2F34; font-style: italic; margin-bottom: 26px; }
+        .ta { font-weight: 600; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+        .tco { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+        /* CONTACT */
+        #contact {
+          background: linear-gradient(135deg, #FFE0EA 0%, #FFEEF4 55%, #FFD6E0 100%);
+          text-align: center;
+        }
+        #contact .eyebrow { justify-content: center; }
+        #contact .eyebrow::after { display: none; }
+        #contact .sec-title { margin: 0 auto 16px; max-width: 500px; }
+        .csub { font-size: 16px; color: #7A5A63; max-width: 400px; margin: 0 auto 40px; line-height: 1.7; }
+        .cemail {
+          display: inline-flex; align-items: center; gap: 10px;
+          font-family: 'Inter', sans-serif; font-size: 21px; font-style: italic;
+          color: var(--black); text-decoration: none;
+          border-bottom: 2px solid var(--pink-hot); padding-bottom: 3px;
+          margin-bottom: 40px; transition: color 0.2s;
+        }
+        .cemail:hover { color: var(--pink-hot); }
+        .cbtns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+        /* FOOTER */
+        footer {
+          background: var(--charcoal); padding: 58px 56px;
+          display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px;
+          color: rgba(255,255,255,0.5);
+        }
+        .flogo {
+          font-family: 'Inter', sans-serif; font-weight: 700;
+          font-size: 25px; color: var(--white); margin-bottom: 13px; display: block; text-decoration: none;
+        }
+        .ftag { font-size: 13px; line-height: 1.7; max-width: 260px; margin-bottom: 20px; }
+        .femail { font-size: 13px; color: var(--pink-deep); text-decoration: none; }
+        .femail:hover { opacity: 0.7; }
+        .fct { font-size: 11px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--white); margin-bottom: 16px; }
+        .fl { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+        .fl a { text-decoration: none; font-size: 13px; color: rgba(255,255,255,0.42); transition: color 0.2s; }
+        .fl a:hover { color: var(--white); }
+        .fbot {
+          background: var(--black); padding: 17px 56px;
+          display: flex; justify-content: space-between; align-items: center;
+        }
+        .fbot p { font-size: 12px; color: rgba(255,255,255,0.28); }
+
+        @media (max-width: 900px) {
+          nav { padding: 16px 20px; }
+          .nav-links { display: none; }
+          .hero-hey, .hero-there { font-size: 54px; letter-spacing: -2px; }
+          .hero-title-row { padding: 28px 20px 0; }
+          .hero-status-pill, .hero-spec-text { display: none; }
+          .hero-photo { width: clamp(200px,60vw,320px); }
+          .hero-bottom { padding: 0 20px 32px; flex-direction: column; align-items: flex-start; gap: 12px; }
+          .hero-name { font-size: 44px; }
+          .hero-role { font-size: 22px; text-align: left; }
+          .hero-stats { flex-direction: column; }
+          .stat-box { border-right: none; border-bottom: 1px solid var(--divider); }
+          section { padding: 64px 20px; }
+          .wd-layout { grid-template-columns: 1fr; gap: 36px; }
+          .pg, .sg, .tg { grid-template-columns: 1fr; }
+          .wf-row { grid-template-columns: 1fr; }
+          .ws { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+          footer { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px; }
+          .fbot { padding: 14px 20px; flex-direction: column; gap: 6px; text-align: center; }
+        }
+      `}</style>
+
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+      {/* HERO */}
+      <div className="hero">
+        <div className="blob1"></div>
+        <div className="blob2"></div>
+
+        {/* Big "Hey, there" above image */}
+        <div className="hero-title-row">
+          <span className="hero-hey">Hey<span className="hero-comma">,</span>&nbsp;</span>
+          <span className="hero-there">there</span>
+        </div>
+
+        {/* Photo centered below */}
+        <div className="hero-mid">
+          <div className="hero-status-pill">
+            <span className="sdot"></span>
+            Available for new opportunities
+          </div>
+
+          <div className="hero-photo">
+            <Image 
+              src="/images/IMG_9905.jpg" 
+              alt="Talia Kusmirek" 
+              width={400} 
+              height={533} 
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div className="hero-spec-text">
+            AI x Gen Z<br/>Content Creator<br/>Short-Form Video &amp; UGC<br/>📍 Boston, MA
           </div>
         </div>
-      </nav>
 
-      {/* Hero Section */}
-      <div className={`relative py-12 px-8 lg:px-12 bg-gradient-to-br from-[#ee9cb3] via-[#f5f4f2] to-[#ee9cb3] transition-all duration-1000 ease-out delay-200 ${
-        isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}>
-        <div className="max-w-6xl mx-auto">
-          {/* Title Section */}
-          <div className="text-center mb-12">
-            <h1 className={`font-Gascogne text-6xl lg:text-8xl text-slate-700 mb-4 transition-all duration-1000 ease-out delay-400 ${
-              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}>
-              talia kusmirek
-            </h1>
-            <p className={`font-Inter text-xl text-black font-medium transition-all duration-1000 ease-out delay-600 ${
-              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}>
-              GEN Z FOUNDER & CONTENT CREATOR
-            </p>
+        {/* I AM TALIA + ROLE - with modern Inter font */}
+        <div className="hero-bottom">
+          <div className="hero-name">I AM<br/>TALIA</div>
+          <div className="hero-role">AI x GEN Z<br/><em>Content</em><br/>CREATOR</div>
+        </div>
+
+        {/* Stats */}
+        <div className="hero-stats">
+          <div className="stat-box">
+            <div className="stat-n">20K+</div>
+            <div className="stat-l">Followers</div>
           </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side - Profile */}
-            <div className={`transition-all duration-1000 ease-out delay-800 ${
-              isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-            }`}>
-              <div className="bg-white rounded-3xl p-8 shadow-lg max-w-md mx-auto lg:mx-0">
-                <div className="w-64 h-64 mx-auto mb-6 relative">
-                  <Image 
-                    src="/images/top.jpeg" 
-                    alt="Talia Kusmirek" 
-                    width={256} 
-                    height={256} 
-                    className="w-full h-full object-cover rounded-2xl"
-                  />
-                </div>
-                <div className="text-center">
-                  <div className="flex items-center justify-center text-gray-600 text-sm">
-                    <span className="mr-2">📍</span>
-                    <span>BOSTON</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Side - Value Prop */}
-            <div className={`transition-all duration-1000 ease-out delay-1000 ${
-              isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-            }`}>
-              <div className="bg-white rounded-3xl p-8 shadow-lg">
-                <h2 className="font-Gascogne text-3xl lg:text-4xl text-slate-700 mb-4">
-                  helping founders build & launch in public!
-                </h2>
-                <p className="text-gray-600 mb-8 leading-relaxed">
-                  Creating authentic content that helps founders, college students, and female entrepreneurs share their journey, build their audience, and grow their businesses through strategic storytelling.
-                </p>
-                
-                {/* Your Stats */}
-                <div className="grid grid-cols-3 gap-6 mb-8">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-[#ee9cb3] mb-1">8.9K</div>
-                    <div className="text-sm text-gray-600">Followers</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-[#ee9cb3] mb-1">507K</div>
-                    <div className="text-sm text-gray-600">Views/Month</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-[#ee9cb3] mb-1">6.9%</div>
-                    <div className="text-sm text-gray-600">Engagement</div>
-                  </div>
-                </div>
-
-                {/* Email Contact */}
-                <div className="text-center">
-                  <div className="text-lg text-gray-700 font-medium">kusmire@bc.edu</div>
-                </div>
-              </div>
-            </div>
+          <div className="stat-box">
+            <div className="stat-n">507K</div>
+            <div className="stat-l">Views / Month</div>
+          </div>
+          <div className="stat-box">
+            <div className="stat-n">6.9%</div>
+            <div className="stat-l">Engagement Rate</div>
+          </div>
+          <div className="stat-box">
+            <div className="stat-n">50K–200K</div>
+            <div className="stat-l">Avg Views / Video</div>
           </div>
         </div>
       </div>
 
-      {/* Video Portfolio Section */}
-      <div className={`py-16 px-8 lg:px-12 transition-all duration-1000 ease-out delay-600 ${
-        isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}>
-        <div className="max-w-6xl mx-auto">
-          {/* Networking & Landing Internships Section */}
-          <div className="mb-16">
-            <h2 className="font-Gascogne text-3xl text-slate-700 mb-2">networking & landing internships</h2>
-            <p className="text-gray-600 text-sm mb-8">SHORT FORM UGC VIDEOS</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-center">
-              {[
-                { 
-                  title: "Networking & Career Growth", 
-                  embed: "DOGwKTxDV0z"
-                },
-                { 
-                  title: "Professional Development Tips", 
-                  embed: "DNoY-Fdv1r1"
-                },
-                { 
-                  title: "Building Industry Connections", 
-                  embed: "DNBOHXpvg5E"
-                }
-              ].map((item, index) => (
-                <div key={index} className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
-                  <div className="w-full h-[28rem] rounded-xl mb-4 overflow-hidden">
-                    <iframe
-                      src={`https://www.instagram.com/p/${item.embed}/embed/`}
-                      width="100%"
-                      height="100%"
-                      frameBorder="0"
-                      scrolling="no"
-                      allowTransparency={true}
-                      className="w-full h-full"
-                    ></iframe>
-                  </div>
-                  <p className="text-sm text-gray-700 text-center">{item.title}</p>
-                </div>
-              ))}
+      {/* WHAT I DO */}
+      <section id="whatido">
+        <div className="wd-layout">
+          <div className="wd-left">
+            <div className="eyebrow">What I Do</div>
+            <h2 className="sec-title">I overthink everything<br/>so your audience<br/><em>doesn't have to.</em></h2>
+            <p className="lead">I turn AI, careers, and startup ideas into content people actually watch — content that feels native, communicates fast, and actually performs.</p>
+            <div className="pill-row">
+              <span className="pill">Feels native (not like an ad)</span>
+              <span className="pill">Communicates fast</span>
+              <span className="pill">Actually performs</span>
+              <span className="pill">Reaches Gen Z</span>
             </div>
+            <a href="#contact" className="btn-p">Book a Call →</a>
+            <a href="#pillars" className="btn-g">See My Content</a>
           </div>
-
-          {/* Startup Life Section */}
-          <div className="mb-16">
-            <div className="flex justify-between items-center mb-8">
-              <div>
-                <h2 className="font-Gascogne text-3xl text-slate-700 mb-2">startup life</h2>
-                <p className="text-gray-600 text-sm">SHORT FORM UGC VIDEOS</p>
-              </div>
-              <button 
-                className="border-2 border-[#ee9cb3] text-[#ee9cb3] bg-transparent text-xs font-medium px-4 py-2 rounded-full hover:bg-[#ee9cb3] hover:text-white transition-colors"
-                onClick={() => setShowPopup(true)}
-              >
-                4-6 day turnaround learn more
-              </button>
+          <div className="wd-right">
+            <div className="mc">
+              <div className="mc-icon">🤖</div>
+              <div className="mc-title">AI & Tech Brands</div>
+              <div className="mc-desc">I help you explain your product without sounding technical — and connect with Gen Z users before your competitors do.</div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-center">
-              {[
-                { 
-                  title: "Startup Life & Entrepreneurship", 
-                  embed: "DOEL7F_Dfc9"
-                },
-                { 
-                  title: "Building & Growing Startups", 
-                  embed: "DN36WIQ3HjE"
-                },
-                { 
-                  title: "Startup Challenges & Solutions", 
-                  embed: "DNZFW6XNPXa"
-                }
-              ].map((item, index) => (
-                <div key={index} className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
-                  <div className="w-full h-[28rem] rounded-xl mb-4 overflow-hidden">
-                    <iframe
-                      src={`https://www.instagram.com/p/${item.embed}/embed/`}
-                      width="100%"
-                      height="100%"
-                      frameBorder="0"
-                      scrolling="no"
-                      allowTransparency={true}
-                      className="w-full h-full"
-                    ></iframe>
-                  </div>
-                  <p className="text-sm text-gray-700 text-center">{item.title}</p>
-                </div>
-              ))}
+            <div className="mc">
+              <div className="mc-icon">🎓</div>
+              <div className="mc-title">Career / EdTech / Startups</div>
+              <div className="mc-desc">Reach students and early professionals through relatable content that builds trust and drives real action.</div>
             </div>
-          </div>
-
-          {/* Student Advice & Real Talk Section */}
-          <div className="mb-16">
-            <h2 className="font-Gascogne text-3xl text-slate-700 mb-2">student advice & real talk</h2>
-            <p className="text-gray-600 text-sm mb-8">SHORT FORM UGC VIDEOS</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-center">
-              {[
-                { 
-                  title: "Student Life & College Tips", 
-                  embed: "DN8cdj_DWhd"
-                },
-                { 
-                  title: "Real Talk & Student Advice", 
-                  embed: "DNyydDmXM5m"
-                },
-                { 
-                  title: "College Life & Growth", 
-                  embed: "DMvJGKpPAvs"
-                }
-              ].map((item, index) => (
-                <div key={index} className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
-                  <div className="w-full h-[28rem] rounded-xl mb-4 overflow-hidden">
-                    <iframe
-                      src={`https://www.instagram.com/p/${item.embed}/embed/`}
-                      width="100%"
-                      height="100%"
-                      frameBorder="0"
-                      scrolling="no"
-                      allowTransparency={true}
-                      className="w-full h-full"
-                    ></iframe>
-                  </div>
-                  <p className="text-sm text-gray-700 text-center">{item.title}</p>
-                </div>
-              ))}
+            <div className="mc">
+              <div className="mc-icon">📲</div>
+              <div className="mc-title">Consumer Apps</div>
+              <div className="mc-desc">Turn features into stories. I make people stop scrolling and start downloading.</div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Brands & Testimonials Section */}
-      <div className={`py-16 px-8 lg:px-12 bg-white transition-all duration-1000 ease-out delay-1000 ${
-        isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}>
-        <div className="max-w-6xl mx-auto">
-          <h2 className="font-Gascogne text-4xl text-black text-center mb-12">brands</h2>
-          
-          {/* Brand Logos */}
-          <div className="flex justify-center gap-12 mb-16">
-            <div className="bg-white rounded-lg p-6 h-20 flex items-center justify-center shadow-sm border border-gray-100">
-              <Image 
-                src="/images/medici.png" 
-                alt="Medici.ac" 
-                width={120} 
-                height={40} 
-                className="h-8 w-auto object-contain"
-              />
-            </div>
-            <div className="bg-white rounded-lg p-6 h-20 flex items-center justify-center shadow-sm border border-gray-100">
-              <Image 
-                src="/images/plaud.png" 
-                alt="Plaud" 
-                width={120} 
-                height={40} 
-                className="h-8 w-auto object-contain"
-              />
+      {/* CONTENT PILLARS */}
+      <section id="pillars">
+        <div className="pillars-intro">
+          <div className="eyebrow">Content Pillars</div>
+          <h2 className="sec-title">I Can Help You<br/><em>With</em></h2>
+          <p>Three core content buckets built around authentic storytelling that resonates with Gen Z and early professionals.</p>
+        </div>
+        <div className="pg">
+          <div className="pc">
+            <span className="pc-num">01</span>
+            <div className="pc-type">Short Form UGC Videos</div>
+            <div className="pc-name">AI & Tech, Explained Simply</div>
+            <p className="pc-desc">Breaking down AI tools, trends, and concepts in a way Gen Z actually understands and shares.</p>
+            <div className="pc-topics">
+              <span className="pc-t">AI tools & use cases</span>
+              <span className="pc-t">"What this actually means" content</span>
+              <span className="pc-t">Simplifying technical ideas</span>
             </div>
           </div>
-
-          <h2 className="font-Gascogne text-4xl text-black text-center mb-12">+ MANY MORE testimonials</h2>
-          
-          {/* Testimonials */}
-          <div className="flex justify-center gap-8 max-w-4xl mx-auto">
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm flex-1">
-              <p className="text-gray-700 text-sm mb-4 leading-relaxed">&ldquo;Always fast turnaround and quick to reply, making the process so fast to deliver final versions. Talia&apos;s efficiency and communication made our collaboration seamless.&rdquo;</p>
-              <p className="text-gray-500 text-xs font-medium">- Medici.ac</p>
+          <div className="pc">
+            <span className="pc-num">02</span>
+            <div className="pc-type">Short Form UGC Videos</div>
+            <div className="pc-name">Career & Internship Reality</div>
+            <p className="pc-desc">The things no one explains about networking, recruiting, and getting ahead — real, relatable, viral.</p>
+            <div className="pc-topics">
+              <span className="pc-t">How people actually get opportunities</span>
+              <span className="pc-t">Breaking into competitive spaces</span>
+              <span className="pc-t">LinkedIn + networking strategies</span>
             </div>
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm flex-1">
-              <p className="text-gray-700 text-sm mb-4 leading-relaxed">&ldquo;Very organized, made sure a contract was in place so both parties were transparent and accountable. Professional approach that made us feel confident throughout the entire process.&rdquo;</p>
-              <p className="text-gray-500 text-xs font-medium">- Plaud</p>
+          </div>
+          <div className="pc">
+            <span className="pc-num">03</span>
+            <div className="pc-type">Short Form UGC Videos</div>
+            <div className="pc-name">Overthinking, Decoded</div>
+            <p className="pc-desc">Relatable, viral-style content that puts words to what your audience is already thinking.</p>
+            <div className="pc-topics">
+              <span className="pc-t">"Why this works" content</span>
+              <span className="pc-t">Social + career observations</span>
+              <span className="pc-t">High-performing, shareable ideas</span>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Workflow Section */}
-      <div className={`py-16 px-8 lg:px-12 transition-all duration-1000 ease-out delay-1200 ${
-        isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}>
-        <div className="max-w-6xl mx-auto">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className="font-Gascogne text-4xl text-slate-700">workflow</h2>
-            <div className="bg-slate-700 text-white text-sm font-medium px-4 py-2 rounded-full">
-              bundles & rates available upon request
-            </div>
+      {/* SERVICES */}
+      <section id="services">
+        <div className="eyebrow">Services</div>
+        <h2 className="sec-title" style={{maxWidth: '480px'}}>What Working With Me<br/><em>Looks Like</em></h2>
+        <div className="sg">
+          <div className="sc">
+            <span className="sbadge">Short-Form Video</span>
+            <div className="st">UGC Video Content</div>
+            <p className="sd">Built for TikTok, Reels, and Shorts. Concept through final delivery.</p>
+            <ul className="slist">
+              <li>Concept + scripting</li>
+              <li>Filming + editing</li>
+              <li>Hooks, subtitles, CTAs</li>
+              <li>Optimized for performance</li>
+            </ul>
+            <div className="sta">⚡ 4–6 day turnaround</div>
           </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* UGC Videos */}
-            <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
-              <h3 className="font-Gascogne text-2xl text-black mb-6">UGC VIDEOS</h3>
-              <div className="space-y-4">
-                <div className="flex items-center">
-                  <div className="text-2xl text-[#ee9cb3] mr-4">↓</div>
-                  <span className="text-sm text-gray-700"><strong>STRATEGY:</strong> 15 min free brand call (discuss ideas & logistics)</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="text-2xl text-slate-700 mr-4">↓</div>
-                  <span className="text-sm text-gray-700"><strong>VISION:</strong> Scripting for brand approval</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="text-2xl text-[#9cc2ee] mr-4">↓</div>
-                  <span className="text-sm text-gray-700"><strong>DRAFT:</strong> Draft video for review</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="text-2xl text-[#ee9cb3] mr-4">↓</div>
-                  <span className="text-sm text-gray-700"><strong>EDITS:</strong> Feedback incorporated (add text, subtitles, CTA)</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="text-2xl text-slate-700 mr-4">↓</div>
-                  <span className="text-sm text-gray-700"><strong>DELIVERY:</strong> Receive final content</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="text-2xl text-[#9cc2ee] mr-4">↓</div>
-                  <span className="text-sm text-gray-700"><strong>POST:</strong> Receive follow up email on video performance & analytics</span>
-                </div>
-              </div>
-              <div className="mt-6">
-                <span className="bg-slate-700 text-white text-xs font-medium px-3 py-1 rounded-full">5-7 days</span>
-              </div>
-            </div>
-
-            {/* UGC Photos */}
-            <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
-              <h3 className="font-Gascogne text-2xl text-black mb-6">UGC PHOTOS</h3>
-              <div className="space-y-4">
-                <div className="flex items-center">
-                  <div className="text-2xl text-[#ee9cb3] mr-4">↓</div>
-                  <span className="text-sm text-gray-700"><strong>STRATEGY:</strong> 15 min free brand call (discuss ideas & logistics)</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="text-2xl text-slate-700 mr-4">↓</div>
-                  <span className="text-sm text-gray-700"><strong>DRAFT:</strong> Choose from raw images</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="text-2xl text-[#9cc2ee] mr-4">↓</div>
-                  <span className="text-sm text-gray-700"><strong>DELIVERY:</strong> Receive final edited images</span>
-                </div>
-              </div>
-              <div className="mt-6">
-                <span className="bg-slate-700 text-white text-xs font-medium px-3 py-1 rounded-full">2-3 days</span>
-              </div>
-            </div>
+          <div className="sc feat">
+            <span className="mpop">Most Popular</span>
+            <span className="sbadge">Ongoing Partnership</span>
+            <div className="st">Monthly Retainer</div>
+            <p className="sd">Consistent content designed to grow your brand over time — strategy, production, iteration.</p>
+            <ul className="slist">
+              <li>Ongoing content production</li>
+              <li>Strategy + iteration</li>
+              <li>Built for long-term performance</li>
+              <li>Priority response time</li>
+            </ul>
+            <div className="sta">📩 Rates upon request</div>
           </div>
-
-          <div className="text-center mt-12">
-            <button className="bg-[#ee9cb3] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#d88aa0] transition-colors">
-              EMAIL ME
-            </button>
+          <div className="sc">
+            <span className="sbadge">UGC + Brand</span>
+            <div className="st">Brand Content & Photos</div>
+            <p className="sd">Content for your own channels or ads — native, non-ad feel, contract-backed.</p>
+            <ul className="slist">
+              <li>Product integration</li>
+              <li>Storytelling-driven content</li>
+              <li>Raw + edited photos</li>
+              <li>Contract-backed process</li>
+            </ul>
+            <div className="sta">⚡ 2–3 days (photos)</div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Let's Work Together Section */}
-      <div className={`py-20 px-8 lg:px-12 bg-gradient-to-b from-[#ee9cb3] via-[#ee9cb3] to-[#f5f4f2] transition-all duration-1000 ease-out delay-1400 ${
-        isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="font-Gascogne text-5xl text-white mb-8">Let&apos;s work together!</h2>
-            <p className="text-white text-lg font-medium">kusmire@bc.edu</p>
+      {/* WORKFLOW */}
+      <section id="workflow">
+        <div className="wf-intro">
+          <div className="eyebrow">Process</div>
+          <h2 className="sec-title">Simple, Fast,<br/><em>Collaborative.</em></h2>
+          <p>From first call to final delivery — here's exactly how we work together.</p>
+        </div>
+        <div className="wf-row">
+          <div className="ws">
+            <div className="ws-n">01</div>
+            <div className="ws-title">Strategy Call</div>
+            <div className="ws-desc">15-min free call — align on goals, ideas, and logistics</div>
           </div>
-          
-          <div className="relative">
-
-            
-            {/* Emoji Decorations */}
-            <div className="absolute -top-8 left-8 text-5xl transform -rotate-6">
-              📱
-            </div>
-            
-            <div className="absolute -top-4 left-4 text-4xl transform rotate-8">
-              🌱
-            </div>
-            
-            <div className="absolute -top-6 right-6 text-6xl transform rotate-12">
-              📱
-            </div>
-            
-            <div className="absolute -top-2 right-8 text-5xl transform -rotate-8">
-              🌿
-            </div>
-            
-            <div className="absolute -top-6 left-1/4 text-4xl transform rotate-6">
-              🌱
-            </div>
-            
-            <div className="absolute top-2 right-1/4 text-5xl transform -rotate-12">
-              📱
-            </div>
+          <div className="ws">
+            <div className="ws-n">02</div>
+            <div className="ws-title">Concept & Script</div>
+            <div className="ws-desc">Content ideas + scripts sent for brand approval before filming</div>
+          </div>
+          <div className="ws">
+            <div className="ws-n">03</div>
+            <div className="ws-title">Draft Delivery</div>
+            <div className="ws-desc">First version delivered for your review and feedback</div>
+          </div>
+          <div className="ws">
+            <div className="ws-n">04</div>
+            <div className="ws-title">Edits</div>
+            <div className="ws-desc">Text, subtitles, CTAs — refined until it's right</div>
+          </div>
+          <div className="ws">
+            <div className="ws-n">05</div>
+            <div className="ws-title">Delivery + Analytics</div>
+            <div className="ws-desc">Final content + follow-up email on video performance data</div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Footer */}
-      <footer className={`bg-slate-700 text-white py-12 px-8 lg:px-12 transition-all duration-1000 ease-out delay-3800 ${
-        isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}>
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Brand Section */}
-            <div>
-              <h3 className="font-Gascogne text-2xl text-white mb-4">Talia Kusmirek</h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
-                Creating authentic UGC content that connects with audiences and drives real results for brands and startups.
-              </p>
-            </div>
-            
-            {/* Quick Links */}
-            <div>
-              <h4 className="font-Gascogne text-lg text-white mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-sm text-gray-300">
-                <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-                <li><Link href="/guides" className="hover:text-white transition-colors">Guides</Link></li>
-                <li><Link href="/about" className="hover:text-white transition-colors">About</Link></li>
-                <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-            
-            {/* Connect */}
-            <div>
-              <h4 className="font-Gascogne text-lg text-white mb-4">Connect</h4>
-              <ul className="space-y-2 text-sm text-gray-300">
-                <li>
-                  <a href="https://github.com/taliakusmirek" className="hover:text-white transition-colors inline-flex items-center gap-2">
-                    {/* GitHub icon */}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
-                      <path d="M12 .5A11.5 11.5 0 0 0 .5 12 11.5 11.5 0 0 0 8 23.2c.4.1.6-.2.6-.4v-2c-2.5.5-3.1-1.1-3.1-1.1-.4-1-.9-1.3-.9-1.3-.8-.6.1-.6.1-.6.9.1 1.3 1 1.3 1 .8 1.3 2.1.9 2.6.7.1-.6.3-1 .6-1.2-2-.2-4.1-1-4.1-4.5 0-1 .4-1.9 1-2.5-.1-.3-.4-1.2.1-2.5 0 0 .8-.3 2.6 1a9 9 0 0 1 4.6 0c1.8-1.3 2.6-1 2.6-1 .5 1.3.2 2.2.1 2.5.6.6 1 1.5 1 2.5 0 3.5-2.1 4.2-4.1 4.5.3.2.6.8.6 1.6v2.3c0 .2.2.5.6.4A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/>
-                    </svg>
-                    GitHub
-                  </a>
-                </li>
-                <li><a href="https://twitter.com/taliadoux" className="hover:text-white transition-colors">Twitter</a></li>
-                <li><a href="https://linkedin.com/in/taliakusmirek" className="hover:text-white transition-colors">LinkedIn</a></li>
-                <li><a href="https://instagram.com/taliadoux" className="hover:text-white transition-colors">Instagram</a></li>
-                <li><a href="mailto:kusmire@bc.edu" className="hover:text-white transition-colors">kusmire@bc.edu</a></li>
-              </ul>
-            </div>
+      {/* TESTIMONIALS */}
+      <section id="testimonials">
+        <div className="eyebrow">Social Proof</div>
+        <h2 className="sec-title">What Brands <em>Say</em></h2>
+        <div className="tg">
+          <div className="tc">
+            <span className="qm">"</span>
+            <p className="tt">Always fast turnaround and quick to reply, making the process so fast to deliver final versions. Talia's efficiency and communication made our collaboration seamless.</p>
+            <div className="ta">Medici.ac</div>
+            <div className="tco">Brand Partner</div>
           </div>
-          
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-            <p className="text-gray-400 text-sm">
-              © 2024 Talia Kusmirek. All rights reserved.
-            </p>
+          <div className="tc">
+            <span className="qm">"</span>
+            <p className="tt">Very organized, made sure a contract was in place so both parties were transparent and accountable. Professional approach that made us feel confident throughout the entire process.</p>
+            <div className="ta">Plaud</div>
+            <div className="tco">Brand Partner</div>
           </div>
+        </div>
+      </section>
+
+      {/* CONTACT */}
+      <section id="contact">
+        <div className="eyebrow">Get In Touch</div>
+        <h2 className="sec-title">Let's Make Content<br/>People Actually <em>Watch.</em></h2>
+        <p className="csub">If you're building something and want Gen Z to understand it — I can help.</p>
+        <a href="mailto:kusmire@bc.edu" className="cemail">✉ kusmire@bc.edu</a>
+        <div className="cbtns">
+          <a href="mailto:kusmire@bc.edu" className="btn-p">Book a Call →</a>
+          <a href="mailto:kusmire@bc.edu" className="btn-g">Email Me</a>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer>
+        <div>
+          <a href="#" className="flogo">Talia Kusmirek</a>
+          <p className="ftag">Creating authentic UGC content that connects with audiences and drives real results for AI, tech, and startup brands.</p>
+          <a href="mailto:kusmire@bc.edu" className="femail">kusmire@bc.edu</a>
+        </div>
+        <div>
+          <div className="fct">Quick Links</div>
+          <ul className="fl">
+            <li><a href="#">Home</a></li>
+            <li><a href="#pillars">Content</a></li>
+            <li><a href="#workflow">Process</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div className="fct">Connect</div>
+          <ul className="fl">
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">TikTok</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="mailto:kusmire@bc.edu">kusmire@bc.edu</a></li>
+          </ul>
         </div>
       </footer>
-
-      {/* Custom Popup */}
-      {showPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-3xl p-8 max-w-md mx-4 shadow-2xl">
-            <div className="text-center">
-              <h3 className="font-Gascogne text-2xl text-slate-700 mb-4">4-6 Day Turnaround</h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                Quick delivery for all UGC content with professional editing and brand alignment. 
-                We ensure your content is delivered on time with high quality standards.
-              </p>
-              <button 
-                className="bg-[#ee9cb3] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#d88aa0] transition-colors"
-                onClick={() => setShowPopup(false)}
-              >
-                Got it!
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+      <div className="fbot">
+        <p>© 2025 Talia Kusmirek. All rights reserved.</p>
+        <p>Boston, MA · Available for brand partnerships</p>
+      </div>
+    </>
   );
 }

@@ -72,6 +72,6 @@ function NavBarCore() {
 
 export default function NavBar() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/work/")) return null;
+  if (pathname?.startsWith("/work/") || pathname === "/ugc") return null;
   return <NavBarCore />;
 }
